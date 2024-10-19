@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Styling for booked dates */
+.booked-date {
+  background-color: #e13b3b !important;
+  color: #333 !important;
+}
+
+/* Styling for disabled dates */
+.react-calendar__tile--disabled {
+  background-color: #e6e6e6 !important;
+  color: #a0a0a0 !important;
+}
+
+/* Combine styling for booked and disabled dates */
+.react-calendar__tile--disabled.booked-date {
+  background-color: #ff9999 !important;
+  color: #333 !important;
+}
