@@ -1,20 +1,27 @@
 import React from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import './Home.css';  // Import Home-specific CSS
+import Footer from '../components/layout/Footer';  // Import Footer
 
 const Home = () => {
-    return (
-        <Container className="my-5 text-center">
-            <h1 className="display-4">Welcome to Holidaze!</h1>
-            <p className="lead">Your one-stop destination for booking venues.</p>
-            <hr className="my-4" />
-            <p>
-                Discover amazing venues for your next event or getaway.
-            </p>
-            <Button variant="primary" size="lg" href="/venues">
-                Browse Venues
-            </Button>
+  return (
+    <>
+      <div className="home-hero">
+        <Container>
+          <h1>Welcome to Holidaze</h1>
+          <p>Your one-stop destination for booking venues.</p>
+          <Button variant="primary" size="lg" href="/venues">Browse Venues</Button>
         </Container>
-    );
+      </div>
+      
+      <Container className="home-featured">
+        <h2>Featured Venues</h2>
+        {/* Add your featured venues here */}
+      </Container>
+
+      <Footer />
+    </>
+  );
 };
 
 export default Home;

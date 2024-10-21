@@ -1,0 +1,23 @@
+/* _layout.css */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-medium);
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .mt-5 {
+    margin-top: var(--spacing-large);
+  }
+  
+  .mb-5 {
+    margin-bottom: var(--spacing-large);
+  }
+  
+  .py-5 {
+    padding: var(--spacing-large) 0;
+  }
+  

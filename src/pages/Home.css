@@ -1,0 +1,23 @@
+.home-hero {
+    background-color: var(--primary-color); /* Use a primary color variable */
+    padding: 60px 0;
+    text-align: center;
+    color: white;
+  }
+  
+  .home-hero h1 {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+  }
+  
+  .home-hero p {
+    font-family: var(--font-secondary);
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+  
+  .home-featured {
+    text-align: center;
+    margin-top: 40px;
+  }
+  

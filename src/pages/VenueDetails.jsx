@@ -6,7 +6,6 @@ import { getVenueById } from '../services/venues';
 import { createBooking } from '../services/bookings';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import '../App.css';
 
 // Import Bootstrap components
 import { Modal, Button, Alert } from 'react-bootstrap';

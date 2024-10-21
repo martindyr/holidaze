@@ -1,0 +1,25 @@
+/* _typography.css */
+h1, h2, h3, h4 {
+    font-family: var(--font-primary);
+    color: var(--dark-color);
+  }
+  
+  p, button, card-text {
+    font-family: var(--font-secondary);
+    color: var(--dark-color);
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 1rem;
+  }
+  
