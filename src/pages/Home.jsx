@@ -19,7 +19,6 @@ const Home = () => {
         {/* Add your featured venues here */}
       </Container>
 
-      <Footer />
     </>
   );
 };

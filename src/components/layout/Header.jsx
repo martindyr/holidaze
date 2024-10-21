@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout, isVenueManager, getName } from '../../services/auth';
-import LoginModal from '../common/LoginModal';
-import RegisterModal from '../common/RegisterModal';
+import LoginModal from '../spesific/LoginModal';
+import RegisterModal from '../spesific/RegisterModal';
 
 const Header = () => {
     const navigate = useNavigate();

@@ -3,7 +3,7 @@ import { deleteVenue, createVenue, updateVenue } from '../services/venues';
 import { getUserVenues } from '../services/profiles';
 import { Card, Container, Row, Col, Button, Alert, Accordion } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import VenueModal from '../components/common/VenueModal';
+import VenueModal from '../components/spesific/VenueModal';
 
 const MyVenues = () => {
   const [venues, setVenues] = useState([]);
@@ -91,6 +91,7 @@ const handleShowEditModal = (venue) => {
 
   const handleCreateSubmit = async (e) => {
     e.preventDefault();
+    setError(null); // Reset error before trying to submit
     try {
       await createVenue(venueData);
       setShowModal(false);
@@ -100,6 +101,7 @@ const handleShowEditModal = (venue) => {
       setError(err.message);
     }
   };
+  
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();

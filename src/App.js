@@ -7,6 +7,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import MyBookings from './pages/MyBookings';
 import MyVenues from './pages/MyVenues';
+import './styles/main.css'
 
 const App = () => {
     return (
