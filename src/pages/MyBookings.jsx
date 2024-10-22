@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { getUserBookings } from '../services/profiles'; // Import the getUserBookings function
-import { Card, Container, Row, Col } from 'react-bootstrap'; // Use Bootstrap for styling
+import { getUserBookings } from '../services/profiles';
+import { deleteBooking } from '../services/bookings'; // Import the delete function
+import { Card, Container, Row, Col, Button, Alert } from 'react-bootstrap';
 
 const MyBookings = () => {
-    const [bookings, setBookings] = useState([]); // Initialize bookings as an empty array
+    const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -11,11 +12,9 @@ const MyBookings = () => {
         const fetchBookings = async () => {
             try {
                 const response = await getUserBookings();
-                console.log('Bookings response:', response); // Debugging: log the API response
-
-                // Access the "data" property from the response
+                console.log('Bookings response:', response);
                 if (response && Array.isArray(response.data)) {
-                    setBookings(response.data); // Set the bookings array from the "data" property
+                    setBookings(response.data);
                 } else {
                     setError('Invalid response format.');
                 }
@@ -28,6 +27,18 @@ const MyBookings = () => {
 
         fetchBookings();
     }, []);
+
+    // Handle booking deletion
+    const handleDelete = async (id) => {
+        if (window.confirm('Are you sure you want to delete this booking?')) {
+            try {
+                await deleteBooking(id);
+                setBookings(bookings.filter((booking) => booking.id !== id));
+            } catch (err) {
+                alert('Error deleting booking.');
+            }
+        }
+    };
 
     if (loading) {
         return <div>Loading bookings...</div>;
@@ -79,6 +90,11 @@ const MyBookings = () => {
                                         {booking.venue.meta.breakfast && "Breakfast, "}
                                         {booking.venue.meta.pets ? "Pets allowed" : "No pets allowed"}
                                     </Card.Text>
+
+                                    {/* Delete Button */}
+                                    <Button variant="danger" onClick={() => handleDelete(booking.id)}>
+                                        Delete Booking
+                                    </Button>
                                 </Card.Body>
                             </Card>
                         </Col>

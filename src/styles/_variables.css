@@ -1,17 +1,25 @@
 /* _variables.css */
 :root {
-    --primary-color: #007bff; /* Primary button color */
-    --secondary-color: #28a745; /* CTA color */
-    --dark-color: #333333; /* For text */
-    --light-color: #f8f9fa; /* Background color */
-    
-    --font-primary: 'Roboto', sans-serif;
-    --font-secondary: 'Montserrat', sans-serif;
-    
-    --spacing-small: 8px;
-    --spacing-medium: 16px;
-    --spacing-large: 32px;
-  
-    --border-radius: 8px;
-  }
-  
+  --primary-color: #007bff;
+  /* Primary button color */
+  --secondary-color: #28a745;
+  /* CTA color */
+  --dark-color: #333333;
+  /* For text */
+  --light-color: #f8f9fa;
+  /* Background color */
+
+  --font-primary: 'Roboto', sans-serif;
+  --font-secondary: 'Montserrat', sans-serif;
+
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 32px;
+
+  --border-radius: 8px;
+
+  --grid-gutter-width: 16px;
+  --desktop-column-width: 76px;
+  --tablet-column-width: 80px;
+  --mobile-column-width: 72px;
+}

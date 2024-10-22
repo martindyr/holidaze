@@ -1,23 +1,51 @@
 /* _layout.css */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-medium);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-medium);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-5 {
+  margin-top: var(--spacing-large);
+}
+
+.mb-5 {
+  margin-bottom: var(--spacing-large);
+}
+
+.py-5 {
+  padding: var(--spacing-large) 0;
+}
+
+/* Custom grid system based on the design */
+
+/* Desktop Grid (Bootstrap default 12-column) */
+@media (min-width: 1140px) {
+  .custom-grid {
+    display: grid;
+    grid-template-columns: repeat(12, var(--desktop-column-width));
+    grid-gap: var(--grid-gutter-width);
   }
-  
-  .text-center {
-    text-align: center;
+}
+
+/* Tablet Grid (8-column) */
+@media (min-width: 768px) and (max-width: 1139px) {
+  .custom-grid {
+    display: grid;
+    grid-template-columns: repeat(8, var(--tablet-column-width));
+    grid-gap: var(--grid-gutter-width);
   }
-  
-  .mt-5 {
-    margin-top: var(--spacing-large);
+}
+
+/* Mobile Grid (4-column) */
+@media (max-width: 767px) {
+  .custom-grid {
+    display: grid;
+    grid-template-columns: repeat(4, var(--mobile-column-width));
+    grid-gap: var(--grid-gutter-width);
   }
-  
-  .mb-5 {
-    margin-bottom: var(--spacing-large);
-  }
-  
-  .py-5 {
-    padding: var(--spacing-large) 0;
-  }
-  
+}
