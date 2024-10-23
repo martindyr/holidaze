@@ -15,12 +15,14 @@ const VenueFormModal = ({ show, handleClose, venueData = {}, handleSubmit }) => 
   };
 
   const submitHandler = async (e) => {
+    console.log('submithandler arguemnt: ', e)
     e.preventDefault();
     try {
       await handleSubmit(formData); // Submit form data via the handler
       setSuccessMessage('Venue saved successfully!');
       setTimeout(handleClose, 2000);
     } catch (error) {
+      console.log('Error: ', error)
       setErrorMessage('An error occurred. Please try again.');
     }
   };

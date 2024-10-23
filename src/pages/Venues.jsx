@@ -76,33 +76,35 @@ function Venues() {
             </InputGroup>
             {inputError && <Alert variant="danger">{inputError}</Alert>}
 
-            {/* Custom Grid for Venues List */}
-            <div className="custom-grid">
+            {/* Responsive Grid for Venues List */}
+            <Row>
                 {venues.length > 0 ? (
                     venues.map((venue) => (
-                        <div key={venue.id} className="venue-card">
-                            {venue.media?.length > 0 && (
-                                <Card.Img variant="top" src={venue.media[0].url} alt={venue.media[0].alt || venue.name} />
-                            )}
-                            <Card.Body className="venue-card-body">
-                                <Card.Title>{venue.name}</Card.Title>
-                                <Card.Text>
-                                    {venue.description || "No description available."}
-                                </Card.Text>
-                                <ul className="list-unstyled">
-                                    <li><strong>Location:</strong> {venue.location?.city}, {venue.location?.country}</li>
-                                    <li><strong>Max Guests:</strong> {venue.maxGuests}</li>
-                                    <li><strong>Rating:</strong> {venue.rating} / 5</li>
-                                    <li><strong>Price:</strong> ${venue.price} per night</li>
-                                </ul>
-                                <Button variant="primary" href={`/venue/${venue.id}`}>View Details</Button>
-                            </Card.Body>
-                        </div>
+                        <Col key={venue.id} sm={12} md={6} lg={4} className="mb-4"> {/* Adjust the columns here */}
+                            <Card className="h-100">
+                                {venue.media?.length > 0 && (
+                                    <Card.Img variant="top" src={venue.media[0].url} alt={venue.media[0].alt || venue.name} />
+                                )}
+                                <Card.Body>
+                                    <Card.Title>{venue.name}</Card.Title>
+                                    <Card.Text>
+                                        {venue.description || "No description available."}
+                                    </Card.Text>
+                                    <ul className="list-unstyled">
+                                        <li><strong>Location:</strong> {venue.location?.city}, {venue.location?.country}</li>
+                                        <li><strong>Max Guests:</strong> {venue.maxGuests}</li>
+                                        <li><strong>Rating:</strong> {venue.rating} / 5</li>
+                                        <li><strong>Price:</strong> ${venue.price} per night</li>
+                                    </ul>
+                                    <Button variant="primary" href={`/venue/${venue.id}`}>View Details</Button>
+                                </Card.Body>
+                            </Card>
+                        </Col>
                     ))
                 ) : (
                     <p>No venues found.</p>
                 )}
-            </div>
+            </Row>
         </Container>
     );
 }
