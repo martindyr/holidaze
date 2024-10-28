@@ -1,5 +1,4 @@
-// src/components/FormModal.js
-
+// FormModal.js
 import React from 'react';
 import { Button, Form, Alert } from 'react-bootstrap';
 import ModalWrapper from './ModalWrapper';
@@ -28,14 +27,20 @@ const FormModal = ({
               <Form.Check
                 type="checkbox"
                 name={field.name}
-                checked={formData[field.name] || false}
+                checked={formData.meta?.[field.name] || false}
                 onChange={handleInputChange}
               />
             ) : (
               <Form.Control
                 type={field.type}
                 name={field.name}
-                value={formData[field.name] || ''}
+                value={
+                  field.name === 'media'
+                    ? Array.isArray(formData.media)
+                      ? formData.media.map((item) => item.url).join(', ')
+                      : ''
+                    : formData[field.name] || ''
+                }
                 onChange={handleInputChange}
                 required={field.required}
                 as={field.type === 'textarea' ? 'textarea' : 'input'}

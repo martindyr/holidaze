@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { deleteVenue, createVenue, updateVenue } from '../services/venues';
 import { getUserVenues } from '../services/profiles';
+import CustomCard from '../components/common/CustomCard';
 import { Card, Container, Row, Col, Button, Alert, Accordion } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import VenueModal from '../components/spesific/VenueModal';
@@ -59,13 +60,20 @@ const MyVenues = () => {
 };
 
 const handleShowEditModal = (venue) => {
-    setCurrentVenue(venue);
-    setVenueData({
-        ...venue,
-        media: venue.media || [], // Ensure media is an array or default to empty array
-    });
-    setIsEditing(true);
-    setShowModal(true);
+  setCurrentVenue(venue);
+
+  // Safely convert media array of objects into a comma-separated string for the input field
+  const mediaString = Array.isArray(venue.media)
+    ? venue.media.map((mediaItem) => mediaItem.url).join(', ')
+    : ''; // If media is undefined or not an array, default to an empty string
+
+  setVenueData({
+    ...venue,
+    media: mediaString, // Set media as a comma-separated string
+  });
+
+  setIsEditing(true);
+  setShowModal(true);
 };
 
 
@@ -81,6 +89,11 @@ const handleShowEditModal = (venue) => {
           [name]: checked,
         },
       });
+    } else if (name === 'media') {
+      setVenueData({
+        ...venueData,
+        media: value.split(',').map((url) => url.trim()),
+      });
     } else {
       setVenueData({
         ...venueData,
@@ -89,11 +102,10 @@ const handleShowEditModal = (venue) => {
     }
   };
 
-  const handleCreateSubmit = async (e) => {
-    e.preventDefault();
-    setError(null); // Reset error before trying to submit
+  const handleCreateSubmit = async (formData) => {
+    setError(null);
     try {
-      await createVenue(venueData);
+      await createVenue(formData);
       setShowModal(false);
       const response = await getUserVenues({ _bookings: true });
       setVenues(response.data || response);
@@ -102,11 +114,9 @@ const handleShowEditModal = (venue) => {
     }
   };
   
-
-  const handleEditSubmit = async (e) => {
-    e.preventDefault();
+  const handleEditSubmit = async (formData) => {
     try {
-      await updateVenue(currentVenue.id, venueData);
+      await updateVenue(currentVenue.id, formData);
       setShowModal(false);
       const response = await getUserVenues({ _bookings: true });
       setVenues(response.data || response);
@@ -130,60 +140,57 @@ const handleShowEditModal = (venue) => {
         <p>You have no venues yet.</p>
       ) : (
         <Row>
-          {venues.map((venue) => (
-            <Col key={venue.id} md={6} lg={4} className="mb-4">
-              <Card>
-                <Card.Img
-                  variant="top"
-                  src={venue.media.length > 0 ? venue.media[0] : 'https://via.placeholder.com/150'}
-                  alt={venue.name}
-                />
-                <Card.Body>
-                  <Card.Title>{venue.name}</Card.Title>
+        {venues.map((venue) => (
+          <Col key={venue.id} sm={12} md={6} lg={4} className="mb-4">
+            <CustomCard
+              imageSrc={venue.media.length > 0 ? venue.media[0].url : 'https://via.placeholder.com/150'}
+              imageAlt={venue.name}
+              title={venue.name}
+              bodyContent={
+                <>
                   <Card.Text>{venue.description}</Card.Text>
                   <Card.Text>
-                    <strong>Price:</strong> ${venue.price}<br />
+                    <strong>Price:</strong> ${venue.price}
+                    <br />
                     <strong>Max Guests:</strong> {venue.maxGuests}
                   </Card.Text>
-                  <Button variant="primary" onClick={() => handleShowEditModal(venue)} className="me-2">
-                    Edit
-                  </Button>
-                  <Button variant="danger" onClick={() => handleDelete(venue.id)}>
-                    Delete
-                  </Button>
+                  {/* Include the Accordion for bookings if necessary */}
                   {venue.bookings?.length > 0 && (
                     <Accordion className="mt-3">
-                      <Accordion.Item eventKey="0">
-                        <Accordion.Header>View Bookings ({venue.bookings.length})</Accordion.Header>
-                        <Accordion.Body>
-                          {venue.bookings.map((booking) => (
-                            <div key={booking.id} className="border p-2 mb-2">
-                              <p><strong>Booking ID:</strong> {booking.id}</p>
-                              <p><strong>Check-in:</strong> {new Date(booking.dateFrom).toLocaleDateString()}</p>
-                              <p><strong>Check-out:</strong> {new Date(booking.dateTo).toLocaleDateString()}</p>
-                              <p><strong>Guests:</strong> {booking.guests}</p>
-                            </div>
-                          ))}
-                        </Accordion.Body>
-                      </Accordion.Item>
+                      {/* Accordion content */}
                     </Accordion>
                   )}
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
+                </>
+              }
+              buttons={[
+                {
+                  text: 'Edit',
+                  variant: 'primary',
+                  onClick: () => handleShowEditModal(venue),
+                  className: 'me-2',
+                },
+                {
+                  text: 'Delete',
+                  variant: 'danger',
+                  onClick: () => handleDelete(venue.id),
+                },
+              ]}
+            />
+          </Col>
+        ))}
+      </Row>
       )}
 
-      <VenueModal
-        show={showModal}
-        handleClose={handleCloseModal}
-        venueData={venueData}
-        handleChange={handleChange}
-        handleSubmit={isEditing ? handleEditSubmit : handleCreateSubmit}
-        buttonText={isEditing ? 'Update Venue' : 'Create Venue'}
-        title={isEditing ? 'Edit Venue' : 'Create Venue'}
-      />
+<VenueModal
+  show={showModal}
+  handleClose={handleCloseModal}
+  venueData={venueData}
+  handleChange={handleChange}
+  onSubmit={isEditing ? handleEditSubmit : handleCreateSubmit} // Use onSubmit prop
+  buttonText={isEditing ? 'Update Venue' : 'Create Venue'}
+  title={isEditing ? 'Edit Venue' : 'Create Venue'}
+/>
+
     </Container>
   );
 };

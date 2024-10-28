@@ -1,26 +1,76 @@
-import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import './Home.css';  // Import Home-specific CSS
-import Footer from '../components/layout/Footer';  // Import Footer
+import React, { useEffect, useState } from 'react';
+import { getAllVenues } from '../services/venues';
+import './Home.css'
+import FeaturedSection from '../components/spesific/FeaturedSection';
+import { Button } from 'react-bootstrap';
 
-const Home = () => {
+const Homepage = () => {
+  const [venues, setVenues] = useState([]); // Ensure venues is initialized as an array
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchVenues = async () => {
+      try {
+        const response = await getAllVenues();
+        
+        // Check if the response contains the data array
+        if (response && Array.isArray(response.data)) {
+          setVenues(response.data);
+        } else {
+          setError("Invalid response format");
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVenues();
+  }, []);
+
+  if (loading) {
+    return <div>Loading venues...</div>;
+  }
+
+  if (error) {
+    return <div>Error fetching venues: {error}</div>;
+  }
+
+  // Filter venues for different sections
+  const topRatedVenues = venues.filter((venue) => venue.rating >= 4.5).slice(0, 6);
+  const mostBookedVenues = venues
+    .filter((venue) => venue._count.bookings > 0)
+    .sort((a, b) => b._count.bookings - a._count.bookings)
+    .slice(0, 6);
+  const recentlyAddedVenues = venues
+    .sort((a, b) => new Date(b.created) - new Date(a.created))
+    .slice(0, 6);
+
   return (
-    <>
-      <div className="home-hero">
-        <Container>
-          <h1>Welcome to Holidaze</h1>
-          <p>Your one-stop destination for booking venues.</p>
-          <Button variant="primary" size="lg" href="/venues">Browse Venues</Button>
-        </Container>
+    
+    <div className="homepage">
+          <div className="hero-section">
+      <div className="overlay"></div> 
+      <div className="hero-content">
+        <h1 className="hero-heading animate-fadein">Find Your Perfect Escape</h1>
+        <p className="hero-subtext animate-fadein">Discover unique venues for your next adventure. Immerse yourself in luxury, charm, and unforgettable experiences.</p>
+        <Button variant="primary" size="lg" href="#featured-sections" className="cta-button animate-fadein">
+          Browse Venues
+        </Button>
       </div>
-      
-      <Container className="home-featured">
-        <h2>Featured Venues</h2>
-        {/* Add your featured venues here */}
-      </Container>
+    </div>
+      {/* Top-Rated Venues */}
+      <FeaturedSection title="Top-Rated Venues" venues={topRatedVenues} />
 
-    </>
+      {/* Most Booked Venues */}
+      <FeaturedSection title="Most Booked Venues" venues={mostBookedVenues} />
+
+      {/* Recently Added Venues */}
+      <FeaturedSection title="Recently Added Venues" venues={recentlyAddedVenues} />
+    </div>
   );
 };
 
-export default Home;
+export default Homepage;

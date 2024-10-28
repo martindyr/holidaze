@@ -47,6 +47,11 @@ const Header = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
+                        <li className="nav-item">
+                                        <Link className="btn btn-link nav-link" to="/venues">
+                                            Venues
+                                        </Link>
+                                    </li>
                             {!isAuthenticated && (
                                 <>
                                     <li className="nav-item">

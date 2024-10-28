@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getUserBookings } from '../services/profiles';
+import CustomCard from '../components/common/CustomCard'
 import { deleteBooking } from '../services/bookings'; // Import the delete function
 import { Card, Container, Row, Col, Button, Alert } from 'react-bootstrap';
 
@@ -55,51 +56,53 @@ const MyBookings = () => {
                 <p>You have no bookings yet.</p>
             ) : (
                 <Row>
-                    {bookings.map((booking) => (
-                        <Col key={booking.id} md={6} lg={4} className="mb-4">
-                            <Card>
-                                {booking.venue.media && booking.venue.media.length > 0 ? (
-                                    <Card.Img
-                                        variant="top"
-                                        src={booking.venue.media[0].url}
-                                        alt={booking.venue.media[0].alt || booking.venue.name}
-                                    />
-                                ) : (
-                                    <Card.Img
-                                        variant="top"
-                                        src="https://via.placeholder.com/150"
-                                        alt="No image available"
-                                    />
-                                )}
-                                <Card.Body>
-                                    <Card.Title>{booking.venue.name}</Card.Title>
-                                    <Card.Text>
-                                        <strong>Check-in:</strong> {new Date(booking.dateFrom).toLocaleDateString()}<br />
-                                        <strong>Check-out:</strong> {new Date(booking.dateTo).toLocaleDateString()}<br />
-                                        <strong>Guests:</strong> {booking.guests}<br />
-                                        <strong>Price:</strong> ${booking.venue.price}<br />
-                                        <strong>Rating:</strong> {booking.venue.rating}/5
-                                    </Card.Text>
-                                    <Card.Text>
-                                        <strong>Description:</strong> {booking.venue.description}
-                                    </Card.Text>
-                                    <Card.Text>
-                                        <strong>Amenities:</strong><br />
-                                        {booking.venue.meta.wifi && "WiFi, "}
-                                        {booking.venue.meta.parking && "Parking, "}
-                                        {booking.venue.meta.breakfast && "Breakfast, "}
-                                        {booking.venue.meta.pets ? "Pets allowed" : "No pets allowed"}
-                                    </Card.Text>
-
-                                    {/* Delete Button */}
-                                    <Button variant="danger" onClick={() => handleDelete(booking.id)}>
-                                        Delete Booking
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
+                {bookings.map((booking) => (
+                  <Col key={booking.id} md={6} lg={4} className="mb-4">
+                    <CustomCard
+                      imageSrc={
+                        booking.venue.media && booking.venue.media.length > 0
+                          ? booking.venue.media[0].url
+                          : 'https://via.placeholder.com/150'
+                      }
+                      imageAlt={booking.venue.name}
+                      title={booking.venue.name}
+                      bodyContent={
+                        <>
+                          <Card.Text>
+                            <strong>Check-in:</strong> {new Date(booking.dateFrom).toLocaleDateString()}
+                            <br />
+                            <strong>Check-out:</strong> {new Date(booking.dateTo).toLocaleDateString()}
+                            <br />
+                            <strong>Guests:</strong> {booking.guests}
+                            <br />
+                            <strong>Price:</strong> ${booking.venue.price}
+                            <br />
+                            <strong>Rating:</strong> {booking.venue.rating}/5
+                          </Card.Text>
+                          <Card.Text>
+                            <strong>Description:</strong> {booking.venue.description}
+                          </Card.Text>
+                          <Card.Text>
+                            <strong>Amenities:</strong>
+                            <br />
+                            {booking.venue.meta.wifi && 'WiFi, '}
+                            {booking.venue.meta.parking && 'Parking, '}
+                            {booking.venue.meta.breakfast && 'Breakfast, '}
+                            {booking.venue.meta.pets ? 'Pets allowed' : 'No pets allowed'}
+                          </Card.Text>
+                        </>
+                      }
+                      buttons={[
+                        {
+                          text: 'Delete Booking',
+                          variant: 'danger',
+                          onClick: () => handleDelete(booking.id),
+                        },
+                      ]}
+                    />
+                  </Col>
+                ))}
+              </Row>
             )}
         </Container>
     );

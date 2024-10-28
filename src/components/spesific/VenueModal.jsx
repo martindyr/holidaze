@@ -1,28 +1,47 @@
 import React, { useState } from 'react';
 import FormModal from '../common/FormModal';
 
-const VenueFormModal = ({ show, handleClose, venueData = {}, handleSubmit }) => {
-  const [formData, setFormData] = useState(venueData);
+const VenueModal = ({
+  show,
+  handleClose,
+  venueData = {},
+  onSubmit,
+  handleChange,
+  buttonText,
+  title,
+}) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const handleInputChange = (e) => {
-    const { name, type, checked, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
-  };
-
-  const submitHandler = async (e) => {
-    console.log('submithandler arguemnt: ', e)
-    e.preventDefault();
+  const submitHandler = async (event) => {
+    if (event && event.preventDefault) {
+      event.preventDefault();
+    }
+  
+    const formData = { ...venueData };
+  
+    // Ensure media is always an array of objects with url property
+    if (formData.media && Array.isArray(formData.media)) {
+      formData.media = formData.media.map((item) => {
+        if (typeof item === 'string') {
+          // If item is a string, turn it into an object
+          return { url: item.trim() };
+        } else if (typeof item === 'object' && item.url) {
+          // If item is already an object with a url property, just trim the url
+          return { url: item.url.trim() };
+        }
+        return item; // In case the data is neither string nor object
+      });
+    } else if (formData.media && typeof formData.media === 'string') {
+      formData.media = formData.media.split(',').map((url) => ({ url: url.trim() }));
+    }
+  
     try {
-      await handleSubmit(formData); // Submit form data via the handler
+      await onSubmit(formData);
       setSuccessMessage('Venue saved successfully!');
       setTimeout(handleClose, 2000);
     } catch (error) {
-      console.log('Error: ', error)
+      console.error('Error submitting venue data: ', error);
       setErrorMessage('An error occurred. Please try again.');
     }
   };
@@ -43,16 +62,16 @@ const VenueFormModal = ({ show, handleClose, venueData = {}, handleSubmit }) => 
     <FormModal
       show={show}
       handleClose={handleClose}
-      title={venueData.id ? 'Edit Venue' : 'Create Venue'}
+      title={title}
       formFields={formFields}
       handleSubmit={submitHandler}
-      formData={formData}
-      handleInputChange={handleInputChange}
+      formData={venueData}
+      handleInputChange={handleChange}
       errorMessage={errorMessage}
       successMessage={successMessage}
-      submitButtonText={venueData.id ? 'Update Venue' : 'Create Venue'}
+      submitButtonText={buttonText}
     />
   );
 };
 
-export default VenueFormModal;
+export default VenueModal;

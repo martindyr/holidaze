@@ -1,0 +1,34 @@
+/* src/components/CustomCard.css */
+
+/* Ensure all images are the same size and use object-fit to maintain aspect ratio */
+.custom-card-image {
+    width: 100%;
+    height: 180px;
+    /* Set a fixed height for the images */
+    overflow: hidden;
+}
+
+.custom-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Maintain aspect ratio and cover the container */
+}
+
+/* Only limit the height of the description to apply ellipsis */
+.custom-card-description p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* Limit to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    /* Ensure multiline support */
+}
+
+/* Ensure all cards have equal heights in their respective rows */
+.custom-card {
+    display: flex;
+    flex-direction: column;
+}
