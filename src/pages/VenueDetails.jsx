@@ -6,8 +6,9 @@ import { getVenueById } from '../services/venues';
 import { createBooking } from '../services/bookings';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { Button } from 'react-bootstrap';
+import { Button, Carousel, Card, Col, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './VenueDetails.css'
 
 import BookingModal from '../components/spesific/BookingModal'; // Import the BookingModal
 
@@ -68,52 +69,75 @@ const VenueDetails = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div className="alert alert-danger">{error}</div>;
 
+    // Check if the user is authenticated
+    const isAuthenticated = !!localStorage.getItem('accessToken');
+
   return (
     <div className="container my-5">
       {venue && (
         <>
-          <h2 className="mb-3">{venue.name}</h2>
-          {venue.media && venue.media.length > 0 ? (
-            <img src={venue.media[0].url} alt={venue.name} className="img-fluid mb-4 rounded" />
-          ) : (
-            <div>No image available</div>
-          )}
-          <p>
-            <strong>Location:</strong> {venue.location?.address || 'N/A'}
-          </p>
-          <p>
-            <strong>Description:</strong> {venue.description}
-          </p>
-          <p>
-            <strong>Price:</strong> ${venue.price}
-          </p>
-          <p>
-            <strong>Capacity:</strong> {venue.maxGuests} people
-          </p>
-          <p>
-            <strong>Amenities:</strong>{' '}
-            {venue.meta.wifi && 'WiFi, '}
-            {venue.meta.parking && 'Parking, '}
-            {venue.meta.breakfast && 'Breakfast, '}
-            {venue.meta.pets ? 'Pets allowed' : 'No pets'}
-          </p>
-
-          {/* Book Now button */}
-          {!!localStorage.getItem('accessToken') && (
+          <Row className="mb-4">
+          <Col md={8}>
+              <h2 className="mb-3">{venue.name}</h2>
+              {venue.media && venue.media.length > 0 ? (
+                <Carousel>
+                  {venue.media.map((image, index) => (
+                    <Carousel.Item key={index}>
+                      <img
+                        src={image.url}
+                        alt={venue.name}
+                        className="d-block w-100 img-fluid rounded"
+                      />
+                    </Carousel.Item>
+                  ))}
+                </Carousel>
+              ) : (
+                <div>No image available</div>
+              )}
+            </Col>
+            <Col md={4} style={{marginTop: 54}}>
+              <Card className="text-center mb-4">
+                <Card.Body>
+                  <Card.Title>Booking Info</Card.Title>
+                  <Card.Text>
+                    <strong>Price:</strong> ${venue.price} per night
+                  </Card.Text>
+                  <Card.Text>
+                    <strong>Capacity:</strong> {venue.maxGuests} people
+                  </Card.Text>
+                  {isAuthenticated && (
             <Button variant="primary" onClick={() => setShowModal(true)} className="mt-3">
               Book Now
             </Button>
           )}
-
-          <h3 className="mt-4">Availability</h3>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+          <div className="details-section mb-4">
+            <h3 className="mt-4">Venue Details</h3>
+            <p>
+              {venue.description || 'No description available.'}
+            </p>
+            <p>
+              <strong>Location:</strong> {venue.location?.address || 'No location provided'}
+            </p>
+            <p>
+              <strong>Amenities:</strong>{' '}
+              {venue.meta.wifi && 'WiFi, '}
+              {venue.meta.parking && 'Parking, '}
+              {venue.meta.breakfast && 'Breakfast, '}
+              {venue.meta.pets ? 'Pets allowed' : 'No pets'}
+            </p>
+          </div>
+{/*           <h3 className="mt-4">Availability</h3>
           <Calendar
             tileClassName={tileClassName}
             minDetail="month"
             next2Label={null}
             prev2Label={null}
-          />
+          /> */}
 
-          {/* Booking Modal */}
           <BookingModal
             show={showModal}
             handleClose={() => setShowModal(false)}

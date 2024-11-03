@@ -1,20 +1,19 @@
-/* Modal.css */
 .modal-container {
-    background-color: var(--primary-color); /* Main background color */
+    background-color: var(--primary-color); 
     padding: 20px;
     border-radius: 8px;
     max-width: 500px;
     margin: auto;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Consistent shadow */
-    animation: fadeIn 0.3s ease-in-out; /* Optional for smoother appearance */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    animation: fadeIn 0.3s ease-in-out; 
   }
   
   .modal-header {
-    font-family: var(--font-primary); /* Use the primary font */
-    font-size: 1.75rem; /* Standard size for all modal headers */
+    font-family: var(--font-primary); 
+    font-size: 1.75rem; 
     color: var(--secondary-color);
     margin-bottom: 10px;
-    text-align: center; /* Center text for uniformity */
+    text-align: center; 
   }
   
   .modal-body {
@@ -42,7 +41,7 @@
   }
   
   .modal-button:hover {
-    background-color: var(--accent-color-dark); /* Same hover state for all */
+    background-color: var(--accent-color-dark);
   }
   
   @keyframes fadeIn {

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import CustomCard from '../components/common/CustomCard'
+import Truncate from '../components/common/Truncate'
 import { getAllVenues, searchVenues } from '../services/venues';
-import { Card, Button, Container, Row, Col, Spinner, Form, InputGroup, Alert } from 'react-bootstrap';
+import { Card, Button, Container, Row, Col, Form, InputGroup, Alert } from 'react-bootstrap';
 
 function Venues() {
     const [venues, setVenues] = useState([]);
@@ -32,19 +33,15 @@ function Venues() {
         if (inputError) setInputError(''); // Clear input error on new input
     };
 
-    // Handle search button click
+
     const handleSearch = async () => {
-   /*      if (!searchQuery.trim()) {
-            setInputError("The search field must contain text.");
-            return;
-        } */
 
         setLoading(true);
         setError(null);
 
         try {
             /* Allow user to clear search field */
-            if(!searchQuery) {
+            if (!searchQuery) {
                 const response = await getAllVenues();
                 setVenues(Array.isArray(response.data) ? response.data : response);
                 /* Venue Search */
@@ -61,7 +58,7 @@ function Venues() {
     };
 
     if (loading) {
-        return <Spinner animation="border" role="status"><span className="sr-only">Loading...</span></Spinner>;
+        return <div>Loading venues...</div>;
     }
 
     if (error) {
@@ -84,48 +81,56 @@ function Venues() {
             </InputGroup>
             {inputError && <Alert variant="danger">{inputError}</Alert>}
 
-            {/* Responsive Grid for Venues List */}
+            {/* Grid for Venues List */}
             <Row>
-  {venues.length > 0 ? (
-    venues.map((venue) => (
-      <Col key={venue.id} sm={12} md={6} lg={4} className="mb-4">
-        <CustomCard
-          imageSrc={venue.media?.length > 0 ? venue.media[0].url : null}
-          imageAlt={venue.name}
-          title={venue.name}
-          bodyContent={
-            <>
-              <Card.Text>{venue.description || 'No description available.'}</Card.Text>
-              <ul className="list-unstyled">
-                <li>
-                  <strong>Location:</strong> {venue.location?.city}, {venue.location?.country}
-                </li>
-                <li>
-                  <strong>Max Guests:</strong> {venue.maxGuests}
-                </li>
-                <li>
-                  <strong>Rating:</strong> {venue.rating} / 5
-                </li>
-                <li>
-                  <strong>Price:</strong> ${venue.price} per night
-                </li>
-              </ul>
-            </>
-          }
-          buttons={[
-            {
-              text: 'View Details',
-              variant: 'primary',
-              href: `/venue/${venue.id}`,
-            },
-          ]}
-        />
-      </Col>
-    ))
-  ) : (
-    <p>No venues found.</p>
-  )}
-</Row>
+                {venues.length > 0 ? (
+                    venues.map((venue) => (
+                        <Col key={venue.id} sm={12} md={6} lg={4} className="mb-4">
+                            <CustomCard
+                                imageSrc={venue.media?.length > 0 ? venue.media[0].url : null}
+                                imageAlt={venue.name}
+                                title={venue.name}
+                                bodyContent={
+                                    <>
+                                        <Card.Text>{Truncate(venue.description) || 'No description available.'}</Card.Text>
+                                        <ul className="list-unstyled">
+                                            <li>
+                                                <strong>Location:</strong>        {venue.location?.city && venue.location?.country ? (
+                                                    `${venue.location.city}, ${venue.location.country}`
+                                                ) : venue.location?.city ? (
+                                                    venue.location.city
+                                                ) : venue.location?.country ? (
+                                                    venue.location.country
+                                                ) : (
+                                                    "No location provided"
+                                                )}
+                                            </li>
+                                            <li>
+                                                <strong>Max Guests:</strong> {venue.maxGuests}
+                                            </li>
+                                            <li>
+                                                <strong>Rating:</strong> <span>{venue.rating ? (`${venue.rating} / 5`) : 'No Rating'}</span>
+                                            </li>
+                                            <li>
+                                                <strong>Price:</strong> ${venue.price} per night
+                                            </li>
+                                        </ul>
+                                    </>
+                                }
+                                buttons={[
+                                    {
+                                        text: 'View Details',
+                                        variant: 'primary',
+                                        href: `/venue/${venue.id}`,
+                                    },
+                                ]}
+                            />
+                        </Col>
+                    ))
+                ) : (
+                    <p>No venues found.</p>
+                )}
+            </Row>
         </Container>
     );
 }

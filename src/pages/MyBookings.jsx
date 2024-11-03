@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getUserBookings } from '../services/profiles';
 import CustomCard from '../components/common/CustomCard'
+import Truncate from '../components/common/Truncate'
 import { deleteBooking } from '../services/bookings'; // Import the delete function
 import { Card, Container, Row, Col, Button, Alert } from 'react-bootstrap';
 
@@ -69,6 +70,9 @@ const MyBookings = () => {
                       bodyContent={
                         <>
                           <Card.Text>
+                          <Card.Text>
+                            {Truncate(booking.venue.description)}
+                          </Card.Text>
                             <strong>Check-in:</strong> {new Date(booking.dateFrom).toLocaleDateString()}
                             <br />
                             <strong>Check-out:</strong> {new Date(booking.dateTo).toLocaleDateString()}
@@ -77,11 +81,9 @@ const MyBookings = () => {
                             <br />
                             <strong>Price:</strong> ${booking.venue.price}
                             <br />
-                            <strong>Rating:</strong> {booking.venue.rating}/5
+                            <strong>Rating:</strong> <span>{booking.venue.rating ? (`${booking.venue.rating} / 5`) : 'No Rating'}</span>
                           </Card.Text>
-                          <Card.Text>
-                            <strong>Description:</strong> {booking.venue.description}
-                          </Card.Text>
+ 
                           <Card.Text>
                             <strong>Amenities:</strong>
                             <br />
@@ -94,7 +96,7 @@ const MyBookings = () => {
                       }
                       buttons={[
                         {
-                          text: 'Delete Booking',
+                          text: 'Delete',
                           variant: 'danger',
                           onClick: () => handleDelete(booking.id),
                         },

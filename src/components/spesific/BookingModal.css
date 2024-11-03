@@ -1,0 +1,14 @@
+.booked-date {
+  background-color: #e13b3b !important;
+  color: #333 !important;
+}
+
+.react-calendar__tile--disabled {
+  background-color: #e6e6e6 !important;
+  color: #a0a0a0 !important;
+}
+
+.react-calendar__tile--disabled.booked-date {
+  background-color: #ff9999 !important;
+  color: #333 !important;
+} 

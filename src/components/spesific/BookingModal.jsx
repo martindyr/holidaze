@@ -5,6 +5,7 @@ import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { addDays, isAfter, startOfDay } from 'date-fns';
+import './BookingModal.css'
 
 const BookingModal = ({
   show,
@@ -161,7 +162,6 @@ const BookingModal = ({
         {bookingError && <Alert variant="danger">{bookingError}</Alert>}
         {bookingSuccess && <Alert variant="success">{bookingSuccess}</Alert>}
         <Form onSubmit={handleBookingSubmit}>
-          {/* Calendar for date selection */}
           <div className="mb-3">
             <strong>Select Check-in and Check-out Dates:</strong>
             <Calendar

@@ -94,5 +94,6 @@ export function logout() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('apiKey');
     localStorage.removeItem('name');
+    localStorage.removeItem('venueManager');
     console.log('User logged out, token, API key, and name removed');
 }

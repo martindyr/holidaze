@@ -13,7 +13,7 @@ const CustomCard = ({ imageSrc, imageAlt, title, bodyContent, buttons }) => {
         </div>
       )}
       <Card.Body className="d-flex flex-column">
-        <Card.Title>{title}</Card.Title>
+        <Card.Title className="custom-card-title">{title}</Card.Title>
         <div className="custom-card-body-content">{bodyContent}</div>
         <div className="mt-auto">
           {buttons &&

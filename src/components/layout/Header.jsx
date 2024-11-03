@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { logout, isVenueManager, getName } from '../../services/auth';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { logout, isVenueManager } from '../../services/auth';
 import LoginModal from '../spesific/LoginModal';
 import RegisterModal from '../spesific/RegisterModal';
+import ProfileCircle from '../spesific/ProfileCircle';
+import { Navbar, Nav, Button } from 'react-bootstrap';
+import './Header.css'; // Ensure you have this file for your styles
 
 const Header = () => {
     const navigate = useNavigate();
+    const location = useLocation(); // Get current location
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showRegisterModal, setShowRegisterModal] = useState(false);
 
@@ -14,9 +18,6 @@ const Header = () => {
 
     // Check if user is manager
     const venueManager = isVenueManager();
-
-    // Get the logged-in user's name
-    const userName = getName();
 
     // Handle the logout process
     const handleLogout = () => {
@@ -27,7 +28,6 @@ const Header = () => {
     // Handle showing modals
     const handleShowLoginModal = () => setShowLoginModal(true);
     const handleCloseLoginModal = () => setShowLoginModal(false);
-
     const handleShowRegisterModal = () => setShowRegisterModal(true);
     const handleCloseRegisterModal = () => setShowRegisterModal(false);
 
@@ -39,68 +39,41 @@ const Header = () => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <Navbar bg="light" expand="lg" className="navbar-custom">
                 <div className="container">
                     <Link className="navbar-brand" to="/">Holidaze</Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav">
-                        <li className="nav-item">
-                                        <Link className="btn btn-link nav-link" to="/venues">
-                                            Venues
-                                        </Link>
-                                    </li>
-                            {!isAuthenticated && (
-                                <>
-                                    <li className="nav-item">
-                                        <button className="btn btn-link nav-link" onClick={handleShowLoginModal}>
-                                            Login
-                                        </button>
-                                    </li>
-                                    <li className="nav-item">
-                                        <button className="btn btn-link nav-link" onClick={handleShowRegisterModal}>
-                                            Register
-                                        </button>
-                                    </li>
-                                </>
-                            )}
-
+                    <Navbar.Toggle aria-controls="navbarNav" />
+                    <Navbar.Collapse id="navbarNav">
+                        <Nav className="me-auto">
+                            <Link className={`nav-link ${location.pathname === '/venues' ? 'active' : ''}`} to="/venues">Venues</Link>
                             {isAuthenticated && (
+                                <Link className={`nav-link ${location.pathname === '/my-bookings' ? 'active' : ''}`} to="/my-bookings">My Bookings</Link>
+                            )}
+                            {venueManager && (
+                                <Link className={`nav-link ${location.pathname === '/my-venues' ? 'active' : ''}`} to="/my-venues">My Venues</Link>
+                            )}
+                        </Nav>
+                        <Nav>
+                            {!isAuthenticated ? (
                                 <>
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to="/my-bookings">My Bookings</Link>
-                                    </li>
-
-                                    {venueManager && (
-                                        <li className="nav-item">
-                                            <Link className="nav-link" to="/my-venues">My Venues</Link>
-                                        </li>
-                                    )}
-
-                                    <li className="nav-item">
-                                        <button className="btn btn-link nav-link" onClick={handleLogout}>
-                                            Logout
-                                        </button>
-                                    </li>
+                                    <Button variant="link" className="nav-link logout-button" onClick={handleShowLoginModal}>Login</Button>
+                                    <Button variant="link" className="nav-link logout-button" onClick={handleShowRegisterModal}>Register</Button>
+                                </>
+                            ) : (
+                                <>
+                                    <Button variant="link" className="nav-link logout-button" onClick={handleLogout}>Logout</Button>
+                                    <div className="d-flex align-items-center" >
+                                        <ProfileCircle />
+                                    </div>
                                 </>
                             )}
-                        </ul>
-                    </div>
+                        </Nav>
+                    </Navbar.Collapse>
                 </div>
-            </nav>
+            </Navbar>
 
-            <LoginModal
-                show={showLoginModal}
-                handleClose={handleCloseLoginModal}
-                onLoginSuccess={handleLoginSuccess}
-            />
-
-            <RegisterModal
-                show={showRegisterModal}
-                handleClose={handleCloseRegisterModal}
-            />
+            <LoginModal show={showLoginModal} handleClose={handleCloseLoginModal} onLoginSuccess={handleLoginSuccess} />
+            <RegisterModal show={showRegisterModal} handleClose={handleCloseRegisterModal} />
         </>
     );
 };

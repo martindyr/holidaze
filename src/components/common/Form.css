@@ -1,27 +1,19 @@
-/* Form.css */
 .form-container {
     background-color: var(--primary-color);
-    /* Main background color */
     padding: 20px;
     border-radius: 8px;
     max-width: 500px;
     margin: auto;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    /* Consistent shadow with modal */
     font-family: var(--font-secondary);
-    /* Use the secondary font for form content */
 }
 
 .form-header {
     font-family: var(--font-primary);
-    /* Use primary font for headers */
     font-size: 1.5rem;
-    /* Standard size for all form headers */
     color: var(--secondary-color);
-    /* Consistent color with modal */
     margin-bottom: 20px;
     text-align: center;
-    /* Center text for uniformity */
 }
 
 .form-group {
@@ -44,13 +36,10 @@
     font-family: var(--font-secondary);
     font-size: 1rem;
     border: 1px solid var(--border-color);
-    /* Use border color from guidelines */
     border-radius: 5px;
     background-color: var(--input-bg-color);
-    /* Light background for inputs */
     color: var(--text-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    /* Light shadow for input fields */
     transition: border-color 0.3s ease;
 }
 
@@ -58,13 +47,11 @@
 .form-textarea:focus,
 .form-select:focus {
     border-color: var(--accent-color);
-    /* Highlight with accent color on focus */
     outline: none;
 }
 
 .form-textarea {
     resize: vertical;
-    /* Allow resizing for textareas */
 }
 
 .form-button {
@@ -78,12 +65,10 @@
     transition: background-color 0.3s ease;
     display: block;
     width: 100%;
-    /* Full-width button */
 }
 
 .form-button:hover {
     background-color: var(--accent-color-dark);
-    /* Darker color on hover */
 }
 
 .form-footer {
@@ -91,7 +76,6 @@
     margin-top: 20px;
     font-size: 0.9rem;
     color: var(--text-muted-color);
-    /* Use muted color for footer text */
 }
 
 .form-footer a {

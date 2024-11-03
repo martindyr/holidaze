@@ -1,16 +1,18 @@
-/* _variables.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 :root {
   --primary-color: #007bff;
-  /* Primary button color */
   --secondary-color: #28a745;
-  /* CTA color */
   --dark-color: #333333;
-  /* For text */
   --light-color: #f8f9fa;
-  /* Background color */
+  --error-color: #F44336;
+  --warning-color: #ffC107;
+  --success: #4caf50;
+  --info-color: #2196f3;
 
-  --font-primary: 'Roboto', sans-serif;
-  --font-secondary: 'Montserrat', sans-serif;
+
+  --font-primary: 'Poppins', sans-serif;
+  --font-secondary: 'Roboto', sans-serif;
 
   --spacing-small: 8px;
   --spacing-medium: 16px;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAllVenues } from '../services/venues';
+import { Link } from 'react-router-dom';
 import './Home.css'
 import FeaturedSection from '../components/spesific/FeaturedSection';
 import { Button } from 'react-bootstrap';
@@ -13,7 +14,7 @@ const Homepage = () => {
     const fetchVenues = async () => {
       try {
         const response = await getAllVenues();
-        
+
         // Check if the response contains the data array
         if (response && Array.isArray(response.data)) {
           setVenues(response.data);
@@ -49,25 +50,24 @@ const Homepage = () => {
     .slice(0, 6);
 
   return (
-    
+
     <div className="homepage">
-          <div className="hero-section">
-      <div className="overlay"></div> 
-      <div className="hero-content">
-        <h1 className="hero-heading animate-fadein">Find Your Perfect Escape</h1>
-        <p className="hero-subtext animate-fadein">Discover unique venues for your next adventure. Immerse yourself in luxury, charm, and unforgettable experiences.</p>
-        <Button variant="primary" size="lg" href="#featured-sections" className="cta-button animate-fadein">
-          Browse Venues
-        </Button>
+      <div className="hero-section">
+        <div className="overlay"></div>
+        <div className="hero-content">
+          <h1 className="hero-heading animate-fadein">Find Your Perfect Escape</h1>
+          <p className="hero-subtext animate-fadein">Discover unique venues for your next adventure. Immerse yourself in luxury, charm, and unforgettable experiences.</p>
+          <Link to="/venues">
+            <Button variant="primary" size="lg" className="cta-button animate-fadein">
+              Browse Venues
+            </Button>
+          </Link>
+        </div>
       </div>
-    </div>
-      {/* Top-Rated Venues */}
       <FeaturedSection title="Top-Rated Venues" venues={topRatedVenues} />
 
-      {/* Most Booked Venues */}
       <FeaturedSection title="Most Booked Venues" venues={mostBookedVenues} />
 
-      {/* Recently Added Venues */}
       <FeaturedSection title="Recently Added Venues" venues={recentlyAddedVenues} />
     </div>
   );

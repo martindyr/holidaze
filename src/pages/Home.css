@@ -1,9 +1,3 @@
-/* src/css/Homepage.css */
-
-.homepage {
-  padding: 20px;
-}
-
 .featured-section {
   margin-bottom: 50px;
 }
@@ -11,8 +5,6 @@
 .featured-section h2 {
   font-family: 'Poppins', sans-serif;
   font-size: 32px;
-  color: #2E8B57;
-  /* Primary color */
   margin-bottom: 30px;
 }
 
@@ -20,14 +12,12 @@
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
   color: #333;
-  /* Dark gray from style guide */
 }
 
 .featured-section .card-text {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   color: #666;
-  /* Lighter gray */
 }
 
 /* Additional responsive design adjustments */
@@ -36,8 +26,6 @@
     font-size: 24px;
   }
 }
-
-/* src/css/HeroSection.css */
 
 .hero-section {
   position: relative;
@@ -57,7 +45,6 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  /* Darkens the image to make text pop */
   z-index: 1;
 }
 
@@ -71,11 +58,9 @@
 .hero-heading {
   font-family: 'Poppins', sans-serif;
   font-size: 60px;
-  /* Larger, more dramatic heading */
   font-weight: bold;
   margin-bottom: 20px;
   text-transform: uppercase;
-  /* Make it bold and engaging */
   color: #fff;
   letter-spacing: 2px;
 }
@@ -100,10 +85,8 @@
 .cta-button:hover {
   background-color: #276B45;
   transform: scale(1.05);
-  /* Subtle grow on hover */
 }
 
-/* Add fade-in animation to the hero content */
 .animate-fadein {
   opacity: 0;
   animation: fadein 1.5s ease forwards;
@@ -121,11 +104,9 @@
   }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .hero-heading {
     font-size: 40px;
-    /* Adjust heading size for mobile */
   }
 
   .hero-subtext {

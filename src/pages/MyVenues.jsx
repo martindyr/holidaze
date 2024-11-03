@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { deleteVenue, createVenue, updateVenue } from '../services/venues';
 import { getUserVenues } from '../services/profiles';
 import CustomCard from '../components/common/CustomCard';
-import { Card, Container, Row, Col, Button, Alert, Accordion } from 'react-bootstrap';
+import Truncate from '../components/common/Truncate';
+import { Card, Container, Row, Col, Button, Alert, Accordion, ListGroup  } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import VenueModal from '../components/spesific/VenueModal';
 
@@ -80,6 +81,7 @@ const handleShowEditModal = (venue) => {
   const handleCloseModal = () => setShowModal(false);
 
   const handleChange = (e) => {
+    console.log('change', e)
     const { name, value, type, checked } = e.target;
     if (['wifi', 'parking', 'breakfast', 'pets'].includes(name)) {
       setVenueData({
@@ -92,7 +94,7 @@ const handleShowEditModal = (venue) => {
     } else if (name === 'media') {
       setVenueData({
         ...venueData,
-        media: value.split(',').map((url) => url.trim()),
+        media: value.split(',').map((url) => url),
       });
     } else {
       setVenueData({
@@ -148,17 +150,63 @@ const handleShowEditModal = (venue) => {
               title={venue.name}
               bodyContent={
                 <>
-                  <Card.Text>{venue.description}</Card.Text>
-                  <Card.Text>
-                    <strong>Price:</strong> ${venue.price}
-                    <br />
-                    <strong>Max Guests:</strong> {venue.maxGuests}
-                  </Card.Text>
-                  {/* Include the Accordion for bookings if necessary */}
+                                        <Card.Text>{Truncate(venue.description) || 'No description available.'}</Card.Text>
+                                        <ul className="list-unstyled">
+                                            <li>
+                                                <strong>Location:</strong>        {venue.location?.city && venue.location?.country ? (
+                                                    `${venue.location.city}, ${venue.location.country}`
+                                                ) : venue.location?.city ? (
+                                                    venue.location.city
+                                                ) : venue.location?.country ? (
+                                                    venue.location.country
+                                                ) : (
+                                                    "No location provided"
+                                                )}
+                                            </li>
+                                            <li>
+                                                <strong>Max Guests:</strong> {venue.maxGuests}
+                                            </li>
+                                            <li>
+                                                <strong>Price:</strong> ${venue.price} per night
+                                            </li>
+                                            <li>
+                                                <strong>Rating:</strong> <span>{venue.rating ? (`${venue.rating} / 5`) : 'No Rating'}</span>
+                                            </li>
+                                        </ul>
                   {venue.bookings?.length > 0 && (
-                    <Accordion className="mt-3">
-                      {/* Accordion content */}
-                    </Accordion>
+ <Accordion className="my-3">
+ <Accordion.Item eventKey="0">
+   <Accordion.Header>Bookings ({venue.bookings.length})</Accordion.Header>
+   <Accordion.Body>
+     {venue.bookings.length > 0 ? (
+       <ListGroup>
+         {venue.bookings.map((booking) => (
+           <ListGroup.Item key={booking.id} className="mb-2">
+             <h5>
+               Booking for {booking.guests} guest(s):{' '}
+               <small>
+                 {new Date(booking.dateFrom).toLocaleDateString()} -{' '}
+                 {new Date(booking.dateTo).toLocaleDateString()}
+               </small>
+             </h5>
+             <div>
+               <strong>Customer Name:</strong> {booking.customer.name}
+             </div>
+             <div>
+               <strong>Email:</strong> {booking.customer.email}
+             </div>
+             <div>
+               <strong>Bio:</strong> {booking.customer.bio || 'No bio provided'}
+             </div>
+           </ListGroup.Item>
+         ))}
+       </ListGroup>
+     ) : (
+       <div>No bookings available for this venue.</div>
+     )}
+   </Accordion.Body>
+ </Accordion.Item>
+</Accordion>
                   )}
                 </>
               }

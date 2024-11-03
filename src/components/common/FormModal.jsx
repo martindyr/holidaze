@@ -35,7 +35,7 @@ const FormModal = ({
                 type={field.type}
                 name={field.name}
                 value={
-                  field.name === 'media'
+                  field.name === 'text'
                     ? Array.isArray(formData.media)
                       ? formData.media.map((item) => item.url).join(', ')
                       : ''
