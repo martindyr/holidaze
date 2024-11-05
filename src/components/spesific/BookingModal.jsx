@@ -153,6 +153,10 @@ const BookingModal = ({
     }
   };
 
+  const formatShortWeekday = (locale, date) => {
+    return date.toLocaleDateString(locale, { weekday: 'narrow' }).toUpperCase(); // Returns first letter of the weekday
+  };
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -166,8 +170,12 @@ const BookingModal = ({
             <strong>Select Check-in and Check-out Dates:</strong>
             <Calendar
               selectRange
+              next2Label={null}
+              prev2Label={null}
+              formatShortWeekday={formatShortWeekday}
               allowPartialRange
               onChange={handleDateChange}
+               className="custom-calendar"
               minDate={new Date()}
               tileDisabled={({ date, view }) => {
                 if (view !== 'month') return false;
