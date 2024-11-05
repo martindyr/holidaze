@@ -150,29 +150,29 @@ const handleShowEditModal = (venue) => {
               title={venue.name}
               bodyContent={
                 <>
-                                        <Card.Text>{Truncate(venue.description) || 'No description available.'}</Card.Text>
-                                        <ul className="list-unstyled">
-                                            <li>
-                                                <strong>Location:</strong>        {venue.location?.city && venue.location?.country ? (
-                                                    `${venue.location.city}, ${venue.location.country}`
-                                                ) : venue.location?.city ? (
-                                                    venue.location.city
-                                                ) : venue.location?.country ? (
-                                                    venue.location.country
-                                                ) : (
-                                                    "No location provided"
-                                                )}
-                                            </li>
-                                            <li>
-                                                <strong>Max Guests:</strong> {venue.maxGuests}
-                                            </li>
-                                            <li>
-                                                <strong>Price:</strong> ${venue.price} per night
-                                            </li>
-                                            <li>
-                                                <strong>Rating:</strong> <span>{venue.rating ? (`${venue.rating} / 5`) : 'No Rating'}</span>
-                                            </li>
-                                        </ul>
+                  <Card.Text>{Truncate(venue.description) || 'No description available.'}</Card.Text>
+                  <ul className="list-unstyled">
+                      <li>
+                          <strong>Location:</strong>        {venue.location?.city && venue.location?.country ? (
+                              `${venue.location.city}, ${venue.location.country}`
+                          ) : venue.location?.city ? (
+                              venue.location.city
+                          ) : venue.location?.country ? (
+                              venue.location.country
+                          ) : (
+                              "No location provided"
+                          )}
+                      </li>
+                      <li>
+                          <strong>Max Guests:</strong> {venue.maxGuests}
+                      </li>
+                      <li>
+                          <strong>Price:</strong> ${venue.price} per night
+                      </li>
+                      <li>
+                          <strong>Rating:</strong> <span>{venue.rating ? (`${venue.rating} / 5`) : 'No Rating'}</span>
+                      </li>
+                  </ul>
                   {venue.bookings?.length > 0 && (
  <Accordion className="my-3">
  <Accordion.Item eventKey="0">
