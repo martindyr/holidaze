@@ -66,8 +66,8 @@ function Venues() {
     }
 
     return (
-        <Container className="my-4">
-            <h2 className="text-center mb-4">Available Venues</h2>
+        <Container className="my-3">
+            <h2 className="mb-">Venues</h2>
 
             {/* Search Input and Button */}
             <InputGroup className="mb-4">
@@ -106,7 +106,7 @@ function Venues() {
                                                 )}
                                             </li>
                                             <li>
-                                                <strong>Max Guests:</strong> {venue.maxGuests}
+                                                <strong>Capacity:</strong> {venue.maxGuests} guests
                                             </li>
                                             <li>
                                                 <strong>Rating:</strong> <span>{venue.rating ? (`${venue.rating} / 5`) : 'No Rating'}</span>

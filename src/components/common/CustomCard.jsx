@@ -23,7 +23,7 @@ const CustomCard = ({ imageSrc, imageAlt, title, bodyContent, buttons }) => {
                 variant={button.variant || 'primary'}
                 onClick={button.onClick}
                 href={button.href}
-                className={button.className + ' me-2'}
+                className={button.className + ' m-2'}
               >
                 {button.text}
               </Button>

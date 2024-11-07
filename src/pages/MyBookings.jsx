@@ -51,7 +51,7 @@ const MyBookings = () => {
     }
 
     return (
-        <Container className="my-5">
+        <Container className="my-3">
             <h2>My Bookings</h2>
             {bookings.length === 0 ? (
                 <p>You have no bookings yet.</p>
@@ -70,9 +70,9 @@ const MyBookings = () => {
                       bodyContent={
                         <>
                           <Card.Text>
-                          <Card.Text>
+{/*                           <Card.Text>
                             {Truncate(booking.venue.description)}
-                          </Card.Text>
+                          </Card.Text> */}
                             <strong>Check-in:</strong> {new Date(booking.dateFrom).toLocaleDateString()}
                             <br />
                             <strong>Check-out:</strong> {new Date(booking.dateTo).toLocaleDateString()}
@@ -81,20 +81,25 @@ const MyBookings = () => {
                             <br />
                             <strong>Price:</strong> ${booking.venue.price}
                             <br />
-                            <strong>Rating:</strong> <span>{booking.venue.rating ? (`${booking.venue.rating} / 5`) : 'No Rating'}</span>
+                           {/*  <strong>Rating:</strong> <span>{booking.venue.rating ? (`${booking.venue.rating} / 5`) : 'No Rating'}</span> */}
                           </Card.Text>
  
-                          <Card.Text>
+{/*                           <Card.Text>
                             <strong>Amenities:</strong>
                             <br />
                             {booking.venue.meta.wifi && 'WiFi, '}
                             {booking.venue.meta.parking && 'Parking, '}
                             {booking.venue.meta.breakfast && 'Breakfast, '}
                             {booking.venue.meta.pets ? 'Pets allowed' : 'No pets allowed'}
-                          </Card.Text>
+                          </Card.Text> */}
                         </>
                       }
                       buttons={[
+                        {
+                          text: 'View Details',
+                          variant: 'primary',
+                          href: `/venue/${booking.venue.id}`,
+                        },
                         {
                           text: 'Delete',
                           variant: 'danger',

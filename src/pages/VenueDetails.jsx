@@ -9,6 +9,7 @@ import 'react-calendar/dist/Calendar.css';
 import { Button, Carousel, Card, Col, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './VenueDetails.css'
+import { FaWifi, FaParking, FaUtensils, FaPaw } from 'react-icons/fa'; // Importing React Icons
 
 import BookingModal from '../components/spesific/BookingModal'; // Import the BookingModal
 
@@ -69,15 +70,15 @@ const VenueDetails = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div className="alert alert-danger">{error}</div>;
 
-    // Check if the user is authenticated
-    const isAuthenticated = !!localStorage.getItem('accessToken');
+  // Check if the user is authenticated
+  const isAuthenticated = !!localStorage.getItem('accessToken');
 
   return (
-    <div className="container my-5">
+    <div className="container my-3">
       {venue && (
         <>
           <Row className="mb-4">
-          <Col md={8}>
+            <Col md={8}>
               <h2 className="mb-3">{venue.name}</h2>
               {venue.media && venue.media.length > 0 ? (
                 <Carousel>
@@ -95,7 +96,7 @@ const VenueDetails = () => {
                 <div>No image available</div>
               )}
             </Col>
-            <Col md={4} style={{marginTop: 54}}>
+            <Col md={4} style={{ marginTop: 54 }}>
               <Card className="text-center mb-4">
                 <Card.Body>
                   <Card.Title>Booking Info</Card.Title>
@@ -103,40 +104,58 @@ const VenueDetails = () => {
                     <strong>Price:</strong> ${venue.price} per night
                   </Card.Text>
                   <Card.Text>
-                    <strong>Capacity:</strong> {venue.maxGuests} people
+                    <strong>Capacity:</strong> {venue.maxGuests} guests
                   </Card.Text>
                   {isAuthenticated && (
-            <Button variant="primary" onClick={() => setShowModal(true)} className="mt-3">
-              Book Now
-            </Button>
-          )}
+                    <Button variant="primary" onClick={() => setShowModal(true)} className="mt-3">
+                      Book Now
+                    </Button>
+                  )}
                 </Card.Body>
               </Card>
             </Col>
           </Row>
           <div className="details-section mb-4">
-            <h3 className="mt-4">Venue Details</h3>
+            <h3 className="mt-4">Details</h3>
             <p>
               {venue.description || 'No description available.'}
             </p>
-            <p>
-              <strong>Location:</strong> {venue.location?.address || 'No location provided'}
-            </p>
-            <p>
-              <strong>Amenities:</strong>{' '}
-              {venue.meta.wifi && 'WiFi, '}
-              {venue.meta.parking && 'Parking, '}
-              {venue.meta.breakfast && 'Breakfast, '}
-              {venue.meta.pets ? 'Pets allowed' : 'No pets'}
-            </p>
+            <Row>
+              <Col md={6} className="location-box">
+                <h3>Location</h3>
+                <p>
+                  <strong>Country:</strong> {venue.location?.country || 'Not provided'}
+                </p>
+                <p>
+                  <strong>City:</strong> {venue.location?.city || 'Not provided'}
+                </p>
+                <p>
+                  <strong>Address:</strong> {venue.location?.address || 'Not provided'}
+                </p>
+              </Col>
+              <Col md={6} className="amenities-box">
+                <h3 >Amenities</h3>
+                <ul className="list-unstyled amenities-list">
+                  <li>
+                    <FaWifi size={24} color="var(--dark-color)" />
+                    <span className="amenity-icon">{venue.meta.wifi ? 'Wifi' : 'No Wifi'}</span>
+                  </li>
+                  <li>
+                    <FaParking size={24} color="var(--dark-color)" />
+                    <span className="amenity-icon">{venue.meta.parking ? 'Parking' : 'No Parking'}</span>
+                  </li>
+                  <li>
+                    <FaUtensils size={24} color="var(--dark-color)" />
+                    <span className="amenity-icon">{venue.meta.breakfast ? 'Breakfast' : 'No breakfast'}</span>
+                  </li>
+                  <li>
+                    <FaPaw size={24} color="var(--dark-color)" />
+                    <span className="amenity-icon">{venue.meta.pets ? 'Pets are allowed' : 'Pets are not allowed'}</span>
+                  </li>
+                </ul>
+              </Col>
+            </Row>
           </div>
-{/*           <h3 className="mt-4">Availability</h3>
-          <Calendar
-            tileClassName={tileClassName}
-            minDetail="month"
-            next2Label={null}
-            prev2Label={null}
-          /> */}
 
           <BookingModal
             show={showModal}

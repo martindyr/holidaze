@@ -27,5 +27,6 @@
 
 .custom-card-title {
     font: var(--font-primary);
+    font-size: 20px;
     font-weight: 600;
 }

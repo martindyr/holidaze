@@ -3,7 +3,7 @@ import { deleteVenue, createVenue, updateVenue } from '../services/venues';
 import { getUserVenues } from '../services/profiles';
 import CustomCard from '../components/common/CustomCard';
 import Truncate from '../components/common/Truncate';
-import { Card, Container, Row, Col, Button, Alert, Accordion, ListGroup  } from 'react-bootstrap';
+import { Card, Container, Row, Col, Button, Alert, Accordion, ListGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import VenueModal from '../components/spesific/VenueModal';
 
@@ -44,38 +44,38 @@ const MyVenues = () => {
 
   const handleShowCreateModal = () => {
     setVenueData({
-        name: '',
-        description: '',
-        media: [], // Ensure media is initialized as an empty array
-        price: 0,
-        maxGuests: 1,
-        meta: {
-            wifi: false,
-            parking: false,
-            breakfast: false,
-            pets: false,
-        },
+      name: '',
+      description: '',
+      media: [], // Ensure media is initialized as an empty array
+      price: 0,
+      maxGuests: 1,
+      meta: {
+        wifi: false,
+        parking: false,
+        breakfast: false,
+        pets: false,
+      },
     });
     setIsEditing(false);
     setShowModal(true);
-};
+  };
 
-const handleShowEditModal = (venue) => {
-  setCurrentVenue(venue);
+  const handleShowEditModal = (venue) => {
+    setCurrentVenue(venue);
 
-  // Safely convert media array of objects into a comma-separated string for the input field
-  const mediaString = Array.isArray(venue.media)
-    ? venue.media.map((mediaItem) => mediaItem.url).join(', ')
-    : ''; // If media is undefined or not an array, default to an empty string
+    // Safely convert media array of objects into a comma-separated string for the input field
+    const mediaString = Array.isArray(venue.media)
+      ? venue.media.map((mediaItem) => mediaItem.url).join(', ')
+      : ''; // If media is undefined or not an array, default to an empty string
 
-  setVenueData({
-    ...venue,
-    media: mediaString, // Set media as a comma-separated string
-  });
+    setVenueData({
+      ...venue,
+      media: mediaString, // Set media as a comma-separated string
+    });
 
-  setIsEditing(true);
-  setShowModal(true);
-};
+    setIsEditing(true);
+    setShowModal(true);
+  };
 
 
   const handleCloseModal = () => setShowModal(false);
@@ -115,7 +115,7 @@ const handleShowEditModal = (venue) => {
       setError(err.message);
     }
   };
-  
+
   const handleEditSubmit = async (formData) => {
     try {
       await updateVenue(currentVenue.id, formData);
@@ -132,7 +132,7 @@ const handleShowEditModal = (venue) => {
   }
 
   return (
-    <Container className="my-5">
+    <Container className="my-3">
       <h2>My Venues</h2>
       <Button variant="primary" onClick={handleShowCreateModal} className="mb-4">
         Create Venue
@@ -142,102 +142,106 @@ const handleShowEditModal = (venue) => {
         <p>You have no venues yet.</p>
       ) : (
         <Row>
-        {venues.map((venue) => (
-          <Col key={venue.id} sm={12} md={6} lg={4} className="mb-4">
-            <CustomCard
-              imageSrc={venue.media.length > 0 ? venue.media[0].url : 'https://via.placeholder.com/150'}
-              imageAlt={venue.name}
-              title={venue.name}
-              bodyContent={
-                <>
-                                        <Card.Text>{Truncate(venue.description) || 'No description available.'}</Card.Text>
-                                        <ul className="list-unstyled">
-                                            <li>
-                                                <strong>Location:</strong>        {venue.location?.city && venue.location?.country ? (
-                                                    `${venue.location.city}, ${venue.location.country}`
-                                                ) : venue.location?.city ? (
-                                                    venue.location.city
-                                                ) : venue.location?.country ? (
-                                                    venue.location.country
-                                                ) : (
-                                                    "No location provided"
-                                                )}
-                                            </li>
-                                            <li>
-                                                <strong>Max Guests:</strong> {venue.maxGuests}
-                                            </li>
-                                            <li>
-                                                <strong>Price:</strong> ${venue.price} per night
-                                            </li>
-                                            <li>
-                                                <strong>Rating:</strong> <span>{venue.rating ? (`${venue.rating} / 5`) : 'No Rating'}</span>
-                                            </li>
-                                        </ul>
-                  {venue.bookings?.length > 0 && (
- <Accordion className="my-3">
- <Accordion.Item eventKey="0">
-   <Accordion.Header>Bookings ({venue.bookings.length})</Accordion.Header>
-   <Accordion.Body>
-     {venue.bookings.length > 0 ? (
-       <ListGroup>
-         {venue.bookings.map((booking) => (
-           <ListGroup.Item key={booking.id} className="mb-2">
-             <h5>
-               Booking for {booking.guests} guest(s):{' '}
-               <small>
-                 {new Date(booking.dateFrom).toLocaleDateString()} -{' '}
-                 {new Date(booking.dateTo).toLocaleDateString()}
-               </small>
-             </h5>
-             <div>
-               <strong>Customer Name:</strong> {booking.customer.name}
-             </div>
-             <div>
-               <strong>Email:</strong> {booking.customer.email}
-             </div>
-             <div>
-               <strong>Bio:</strong> {booking.customer.bio || 'No bio provided'}
-             </div>
-           </ListGroup.Item>
-         ))}
-       </ListGroup>
-     ) : (
-       <div>No bookings available for this venue.</div>
-     )}
-   </Accordion.Body>
- </Accordion.Item>
-</Accordion>
-                  )}
-                </>
-              }
-              buttons={[
-                {
-                  text: 'Edit',
-                  variant: 'primary',
-                  onClick: () => handleShowEditModal(venue),
-                  className: 'me-2',
-                },
-                {
-                  text: 'Delete',
-                  variant: 'danger',
-                  onClick: () => handleDelete(venue.id),
-                },
-              ]}
-            />
-          </Col>
-        ))}
-      </Row>
+          {venues.map((venue) => (
+            <Col key={venue.id} sm={12} md={6} lg={4} className="mb-4">
+              <CustomCard
+                imageSrc={venue.media.length > 0 ? venue.media[0].url : 'https://via.placeholder.com/150'}
+                imageAlt={venue.name}
+                title={venue.name}
+                bodyContent={
+                  <>
+                    <Card.Text>{Truncate(venue.description) || 'No description available.'}</Card.Text>
+                    <ul className="list-unstyled">
+                      <li>
+                        <strong>Location:</strong>        {venue.location?.city && venue.location?.country ? (
+                          `${venue.location.city}, ${venue.location.country}`
+                        ) : venue.location?.city ? (
+                          venue.location.city
+                        ) : venue.location?.country ? (
+                          venue.location.country
+                        ) : (
+                          "No location provided"
+                        )}
+                      </li>
+                      <li>
+                        <strong>Capacity:</strong> {venue.maxGuests} guests
+                      </li>
+                      <li>
+                        <strong>Price:</strong> ${venue.price} per night
+                      </li>
+                      <li>
+                        <strong>Rating:</strong> <span>{venue.rating ? (`${venue.rating} / 5`) : 'No Rating'}</span>
+                      </li>
+                    </ul>
+                    {venue.bookings?.length > 0 && (
+                      <Accordion className="my-3">
+                        <Accordion.Item eventKey="0">
+                          <Accordion.Header>Bookings ({venue.bookings.length})</Accordion.Header>
+                          <Accordion.Body>
+                            {venue.bookings.length > 0 ? (
+                              <ListGroup>
+                                {venue.bookings.map((booking) => (
+                                  <ListGroup.Item key={booking.id} className="mb-2">
+                                    <h5>
+                                      Booking for {booking.guests} guest(s):{' '}
+                                      <small>
+                                        {new Date(booking.dateFrom).toLocaleDateString()} -{' '}
+                                        {new Date(booking.dateTo).toLocaleDateString()}
+                                      </small>
+                                    </h5>
+                                    <div>
+                                      <strong>Customer Name:</strong> {booking.customer.name}
+                                    </div>
+                                    <div>
+                                      <strong>Email:</strong> {booking.customer.email}
+                                    </div>
+                                    <div>
+                                      <strong>Bio:</strong> {booking.customer.bio || 'No bio provided'}
+                                    </div>
+                                  </ListGroup.Item>
+                                ))}
+                              </ListGroup>
+                            ) : (
+                              <div>No bookings available for this venue.</div>
+                            )}
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    )}
+                  </>
+                }
+                buttons={[
+                  {
+                    text: 'View Details',
+                    variant: 'primary',
+                    href: `/venue/${venue.id}`,
+                  },
+                  {
+                    text: 'Edit',
+                    variant: 'primary',
+                    onClick: () => handleShowEditModal(venue),
+                  },
+                  {
+                    text: 'Delete',
+                    variant: 'danger',
+                    onClick: () => handleDelete(venue.id),
+                  },
+                ]}
+              />
+            </Col>
+          ))}
+        </Row>
       )}
 
-<VenueModal
-  show={showModal}
-  handleClose={handleCloseModal}
-  venueData={venueData}
-  handleChange={handleChange}
-  onSubmit={isEditing ? handleEditSubmit : handleCreateSubmit} // Use onSubmit prop
-  buttonText={isEditing ? 'Update Venue' : 'Create Venue'}
-  title={isEditing ? 'Edit Venue' : 'Create Venue'}
-/>
+      <VenueModal
+        show={showModal}
+        handleClose={handleCloseModal}
+        venueData={venueData}
+        handleChange={handleChange}
+        onSubmit={isEditing ? handleEditSubmit : handleCreateSubmit} // Use onSubmit prop
+        buttonText={isEditing ? 'Update Venue' : 'Create Venue'}
+        title={isEditing ? 'Edit Venue' : 'Create Venue'}
+      />
 
     </Container>
   );

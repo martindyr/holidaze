@@ -1,1 +1,15 @@
 
+.location-box, .amenities-box {
+    background-color: #f8f9fa; /* Light background for the boxes */
+    border: 1px solid #e5e5e5; /* Border for the boxes */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the boxes */
+  }
+  
+  .amenities-list {
+    padding-left: 0; /* Remove default padding */
+  }
+  
+  .amenity-icon {
+    margin-right: 5px; /* Space between icon and text */
+  }
