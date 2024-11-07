@@ -30,7 +30,8 @@ function Venues() {
     // Handle search input change
     const handleInputChange = (e) => {
         setSearchQuery(e.target.value);
-        if (inputError) setInputError(''); // Clear input error on new input
+        // Clear input error on new input
+        if (inputError) setInputError(''); 
     };
 
 
@@ -40,11 +41,11 @@ function Venues() {
         setError(null);
 
         try {
-            /* Allow user to clear search field */
+            // Allow user to clear search field
             if (!searchQuery) {
                 const response = await getAllVenues();
                 setVenues(Array.isArray(response.data) ? response.data : response);
-                /* Venue Search */
+                // Venue search
             } else {
                 const response = await searchVenues({ q: searchQuery });
                 setVenues(Array.isArray(response.data) ? response.data : response);
@@ -81,7 +82,7 @@ function Venues() {
             </InputGroup>
             {inputError && <Alert variant="danger">{inputError}</Alert>}
 
-            {/* Grid for Venues List */}
+            {/* Venue List */}
             <Row>
                 {venues.length > 0 ? (
                     venues.map((venue) => (
