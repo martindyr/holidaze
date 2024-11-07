@@ -20,6 +20,16 @@
     white-space: normal;
 }
 
+.custom-card-body-content {
+    flex-grow: 1;
+    /* Allow this section to grow and take up available space */
+    display: flex;
+    flex-direction: column;
+    /* Allow vertical stacking within this area */
+    justify-content: space-between;
+    /* Space out items */
+}
+
 .custom-card {
     display: flex;
     flex-direction: column;
@@ -29,4 +39,84 @@
     font: var(--font-primary);
     font-size: 20px;
     font-weight: 600;
+}
+
+.custom-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Adds a subtle shadow */
+    transition: box-shadow 0.3s ease;
+    /* Smooth transition on hover */
+}
+
+.button-row {
+    display: flex;
+    gap: 6px
+}
+
+.custom-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    /* More pronounced shadow on hover */
+}
+
+.rating-stars {
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    font-size: 1.2em;
+    /* Adjust the size of the stars */
+    color: lightgray;
+    /* Default star color */
+    margin-left: 2px;
+    /* Space between stars */
+}
+
+.star.filled {
+    color: gold;
+    /* Color for filled stars */
+}
+
+
+
+
+/* Copied from here: https://stackoverflow.com/questions/25195526/how-to-create-a-pricetag-shape-in-css-and-html  */
+.price-tag {
+    white-space: nowrap;
+    position: relative;
+    margin: 0 5px 0 10px;
+    displaY: inline-block;
+    height: 25px;
+    border-radius: 0 5px 5px 0;
+    padding: 0 18px 0 15px;
+    background: var(--secondary-color);
+    border: 1px solid #C7D2D4;
+    color: #fff;
+    line-height: 23px;
+}
+
+.price-tag:after {
+    position: absolute;
+    right: 0;
+    margin: 1px 7px;
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.price-tag:before {
+    position: absolute;
+    background: var(--secondary-color);
+    content: "\25CF";
+    color: white;
+    text-shadow: 0 0 1px #aaa;
+    font-size: 12px;
+    line-height: 13px;
+    text-indent: 6px;
+    top: 3px;
+    left: -10px;
+    width: 18px;
+    height: 17px;
+    transform: rotate(45deg);
+    border-left: 1px solid #C7D2D4;
+    border-bottom: 1px solid #C7D2D4;
 }

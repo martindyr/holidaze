@@ -109,12 +109,24 @@ function Venues() {
                                             <li>
                                                 <strong>Capacity:</strong> {venue.maxGuests} guests
                                             </li>
-                                            <li>
-                                                <strong>Rating:</strong> <span>{venue.rating ? (`${venue.rating} / 5`) : 'No Rating'}</span>
-                                            </li>
-                                            <li>
-                                                <strong>Price:</strong> ${venue.price} per night
-                                            </li>
+                                            <ul className="list-unstyled d-flex justify-content-between align-items-start">
+                                                <li className="d-flex align-items-end">
+                                                    <div className="rating-stars">
+                                                        {venue.rating ? (
+                                                            [...Array(5)].map((_, index) => (
+                                                                <span key={index} className={index < venue.rating ? 'star filled' : 'star'}>
+                                                                    ★
+                                                                </span>
+                                                            ))
+                                                        ) : (
+                                                            <span>No Rating</span>
+                                                        )}
+                                                    </div>
+                                                </li>
+                                                <li className="price-tag">
+                                                    <span>{venue.price}$</span>
+                                                </li>
+                                            </ul>
                                         </ul>
                                     </>
                                 }

@@ -4,6 +4,7 @@ import CustomCard from '../components/common/CustomCard'
 import Truncate from '../components/common/Truncate'
 import { deleteBooking } from '../services/bookings'; // Import the delete function
 import { Card, Container, Row, Col, Button, Alert } from 'react-bootstrap';
+import './MyBookings.css'
 
 const MyBookings = () => {
     const [bookings, setBookings] = useState([]);

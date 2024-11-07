@@ -30,6 +30,11 @@
 .hero-section {
   position: relative;
   height: 100vh;
+  /* Full viewport height */
+  width: 100vw;
+  /* Full viewport width */
+  margin-left: calc(-50vw + 50%);
+  /* Center it on the page */
   background: url(../assets/images/luxury-vacation-trends.jpg) no-repeat center center/cover;
   display: flex;
   justify-content: center;
