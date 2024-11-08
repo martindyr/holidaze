@@ -97,9 +97,9 @@ const VenueDetails = () => {
               )}
             </Col>
             <Col md={4} style={{ marginTop: 54 }}>
-              <Card className="text-center mb-4">
+              <Card className=" amenities-box text-center mb-4">
                 <Card.Body>
-                  <Card.Title>Booking Info</Card.Title>
+                <h3>Booking Info</h3>
                   <Card.Text>
                     <strong>Price:</strong> ${venue.price} per night
                   </Card.Text>
@@ -135,24 +135,22 @@ const VenueDetails = () => {
               </Col>
               <Col md={6} className="amenities-box">
                 <h3 >Amenities</h3>
-                <ul className="list-unstyled amenities-list">
-                  <li>
+                  <p>
                     <FaWifi size={24} color="var(--dark-color)" />
                     <span className="amenity-icon">{venue.meta.wifi ? 'Wifi' : 'No Wifi'}</span>
-                  </li>
-                  <li>
+                  </p>
+                  <p>
                     <FaParking size={24} color="var(--dark-color)" />
                     <span className="amenity-icon">{venue.meta.parking ? 'Parking' : 'No Parking'}</span>
-                  </li>
-                  <li>
+                  </p>
+                  <p>
                     <FaUtensils size={24} color="var(--dark-color)" />
                     <span className="amenity-icon">{venue.meta.breakfast ? 'Breakfast' : 'No breakfast'}</span>
-                  </li>
-                  <li>
+                  </p>
+                  <p>
                     <FaPaw size={24} color="var(--dark-color)" />
                     <span className="amenity-icon">{venue.meta.pets ? 'Pets are allowed' : 'Pets are not allowed'}</span>
-                  </li>
-                </ul>
+                  </p>
               </Col>
             </Row>
           </div>

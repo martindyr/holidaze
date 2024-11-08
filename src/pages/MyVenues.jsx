@@ -49,6 +49,12 @@ const MyVenues = () => {
       media: [], // Ensure media is initialized as an empty array
       price: 0,
       maxGuests: 1,
+      location: {
+        
+        country: '',
+        city: '',
+        address: '',
+      },
       meta: {
         wifi: false,
         parking: false,
