@@ -19,3 +19,15 @@
   margin-left: 5px;
   /* Space between icon and text */
 }
+
+/* Adjust spacing between columns */
+.details-section .row {
+  gap: 20px;
+  /* Adjust the gap between the columns */
+}
+
+@media (min-width: 768px) {
+  .details-section .col-md-6 {
+    width: 48%;
+  }
+}

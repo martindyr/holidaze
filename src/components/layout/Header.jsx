@@ -6,6 +6,7 @@ import RegisterModal from '../spesific/RegisterModal';
 import ProfileCircle from '../spesific/ProfileCircle';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import './Header.css'; // Ensure you have this file for your styles
+import Logo from '../../assets/icons/Logo.png'; // Import your logo image
 
 const Header = () => {
     const navigate = useNavigate();
@@ -41,7 +42,7 @@ const Header = () => {
         <>
             <Navbar bg="light" expand="lg" className="navbar-custom">
                 <div className="container">
-                    <Link className="navbar-brand" to="/">Holidaze</Link>
+                    <Link className="navbar-brand" to="/"> <img src={Logo} alt="Holidaze Logo" style={{ width: '25px', height: 'auto' }} />Holidaze</Link>
                     <Navbar.Toggle aria-controls="navbarNav" />
                     <Navbar.Collapse id="navbarNav">
                         <Nav className="me-auto">

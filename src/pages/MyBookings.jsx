@@ -74,25 +74,41 @@ const MyBookings = () => {
 {/*                           <Card.Text>
                             {Truncate(booking.venue.description)}
                           </Card.Text> */}
-                            <strong>Check-in:</strong> {new Date(booking.dateFrom).toLocaleDateString()}
-                            <br />
-                            <strong>Check-out:</strong> {new Date(booking.dateTo).toLocaleDateString()}
-                            <br />
-                            <strong>Guests:</strong> {booking.guests}
-                            <br />
-                            <strong>Price:</strong> ${booking.venue.price}
-                            <br />
-                           {/*  <strong>Rating:</strong> <span>{booking.venue.rating ? (`${booking.venue.rating} / 5`) : 'No Rating'}</span> */}
+                            
+                            
+
+                            <ul className="list-unstyled">
+                                            <li>
+                                            <strong>Check-in:</strong> {new Date(booking.dateFrom).toLocaleDateString()}
+                                            </li>
+                                            <li>
+                                            <strong>Check-out:</strong> {new Date(booking.dateTo).toLocaleDateString()}
+                                            </li>
+                                            <li>
+                                            <strong>Guests:</strong> {booking.guests}
+                                            </li>
+                                            <ul className="list-unstyled d-flex justify-content-between align-items-start">
+                                                <li className="d-flex align-items-end">
+                                                    <div className="rating-stars">
+                                                        {booking.venue.rating ? (
+                                                            [...Array(5)].map((_, index) => (
+                                                                <span key={index} className={index < booking.venue.rating ? 'star filled' : 'star'}>
+                                                                    ★
+                                                                </span>
+                                                            ))
+                                                        ) : (
+                                                            <span>No Rating</span>
+                                                        )}
+                                                    </div>
+                                                </li>
+                                                <li className="price-tag">
+                                                    <span>{booking.venue.price}$</span>
+                                                </li>
+                                            </ul>
+                                        </ul>
                           </Card.Text>
  
-{/*                           <Card.Text>
-                            <strong>Amenities:</strong>
-                            <br />
-                            {booking.venue.meta.wifi && 'WiFi, '}
-                            {booking.venue.meta.parking && 'Parking, '}
-                            {booking.venue.meta.breakfast && 'Breakfast, '}
-                            {booking.venue.meta.pets ? 'Pets allowed' : 'No pets allowed'}
-                          </Card.Text> */}
+
                         </>
                       }
                       buttons={[

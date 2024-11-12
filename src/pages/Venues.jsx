@@ -3,6 +3,7 @@ import CustomCard from '../components/common/CustomCard'
 import Truncate from '../components/common/Truncate'
 import { getAllVenues, searchVenues } from '../services/venues';
 import { Card, Button, Container, Row, Col, Form, InputGroup, Alert } from 'react-bootstrap';
+import './Venues.css'
 
 function Venues() {
     const [venues, setVenues] = useState([]);

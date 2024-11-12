@@ -52,7 +52,7 @@ const Homepage = () => {
   return (
 
     <div className="homepage">
-      <div className="hero-section full-width">
+      <div className="hero-section">
         <div className="overlay"></div>
         <div className="hero-content">
           <h1 className="hero-heading animate-fadein">Find Your Perfect Escape</h1>

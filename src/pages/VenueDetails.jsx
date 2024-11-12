@@ -114,14 +114,14 @@ const VenueDetails = () => {
                 </Card.Body>
               </Card>
             </Col>
-          </Row>
+          </Row >
           <div className="details-section mb-4">
             <h3 className="mt-4">Details</h3>
             <p>
               {venue.description || 'No description available.'}
             </p>
             <Row>
-              <Col md={6} className="location-box">
+              <Col md={6}  className="location-box">
                 <h3>Location</h3>
                 <p>
                   <strong>Country:</strong> {venue.location?.country || 'Not provided'}
