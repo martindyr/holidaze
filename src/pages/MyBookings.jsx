@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getUserBookings } from '../services/profiles';
 import CustomCard from '../components/common/CustomCard'
-import Truncate from '../components/common/Truncate'
 import { deleteBooking } from '../services/bookings'; // Import the delete function
-import { Card, Container, Row, Col, Button, Alert } from 'react-bootstrap';
+import { Card, Container, Row, Col } from 'react-bootstrap';
 import './MyBookings.css'
 
 const MyBookings = () => {
@@ -31,7 +30,6 @@ const MyBookings = () => {
         fetchBookings();
     }, []);
 
-    // Handle booking deletion
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this booking?')) {
             try {
@@ -71,11 +69,6 @@ const MyBookings = () => {
                       bodyContent={
                         <>
                           <Card.Text>
-{/*                           <Card.Text>
-                            {Truncate(booking.venue.description)}
-                          </Card.Text> */}
-                            
-                            
 
                             <ul className="list-unstyled">
                                             <li>

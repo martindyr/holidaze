@@ -14,16 +14,15 @@ body {
   justify-content: space-between;
   flex-direction: column;
   min-height: 100vh;
+  /* Concider adding images to the background */
+  /*   background: url(../assets/25be551d-f2ec-43d7-a2b6-3e629d508a94.webp) no-repeat center center/cover; */
 }
 
 .btn {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  /* Adds a subtle shadow */
   transition: box-shadow 0.3s ease;
-  /* Smooth transition on hover */
 }
 
 .btn:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  /* More pronounced shadow on hover */
 }

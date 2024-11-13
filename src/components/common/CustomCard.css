@@ -13,7 +13,6 @@
 .custom-card-description p {
     display: -webkit-box;
     -webkit-line-clamp: 3;
-    /* Limit to 3 lines */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -22,12 +21,9 @@
 
 .custom-card-body-content {
     flex-grow: 1;
-    /* Allow this section to grow and take up available space */
     display: flex;
     flex-direction: column;
-    /* Allow vertical stacking within this area */
     justify-content: space-between;
-    /* Space out items */
 }
 
 .custom-card {
@@ -43,9 +39,7 @@
 
 .custom-card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* Adds a subtle shadow */
     transition: box-shadow 0.3s ease;
-    /* Smooth transition on hover */
 }
 
 .button-row {
@@ -55,7 +49,6 @@
 
 .custom-card:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    /* More pronounced shadow on hover */
 }
 
 .rating-stars {
@@ -65,20 +58,13 @@
 
 .star {
     font-size: 1.2em;
-    /* Adjust the size of the stars */
     color: lightgray;
-    /* Default star color */
     margin-left: 2px;
-    /* Space between stars */
 }
 
 .star.filled {
     color: gold;
-    /* Color for filled stars */
 }
-
-
-
 
 /* Copied from here: https://stackoverflow.com/questions/25195526/how-to-create-a-pricetag-shape-in-css-and-html  */
 .price-tag {

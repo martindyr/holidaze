@@ -1,8 +1,6 @@
-// src/components/CustomCard.js
-
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
-import './CustomCard.css'; // Import the CSS file for styles
+import './CustomCard.css'; 
 
 const CustomCard = ({ imageSrc, imageAlt, title, bodyContent, buttons }) => {
   return (

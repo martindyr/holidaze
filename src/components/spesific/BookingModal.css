@@ -11,54 +11,54 @@
 .react-calendar__tile--disabled.booked-date {
   background-color: #ff9999 !important;
   color: #333 !important;
-} 
+}
+
 .custom-calendar .react-calendar__tile {
-  border: none; /* Remove default border */
-  border-radius: 50%; /* Make the tiles circular */
-  background-color: white; /* Background color for tiles */
-  transition: background-color 0.3s; /* Smooth transition for hover */
-  height: 44px; /* Increase height */
-  width: 44px;  /* Increase width */
-  display: flex; /* Use flexbox to center content */
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  transition: background-color 0.3s;
+  height: 44px;
+  width: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .custom-calendar {
-  font-family: 'Poppins', sans-serif; /* Use your desired font */
-  border: 1px solid #e5e5e5; /* Example border */
-  padding: 20px; /* Padding around the calendar */
+  font-family: 'Poppins', sans-serif;
+  border: 1px solid #e5e5e5;
+  padding: 20px;
 }
 
 .custom-calendar .react-calendar__month-view__days {
-  padding: 0; /* Remove padding around days */
+  padding: 0;
 }
 
 .custom-calendar .react-calendar__tile {
-  border: none; /* Remove default border */
-  background-color: white; /* Background color for tiles */
-  transition: background-color 0.3s; /* Smooth transition for hover */
+  border: none;
+  background-color: white;
+  transition: background-color 0.3s;
 }
 
 .custom-calendar .react-calendar__tile:hover {
-  background-color: #e0f7fa; /* Change background color on hover */
+  background-color: #e0f7fa;
 }
 
 .custom-calendar .react-calendar__tile--active {
-  background-color: #007bff; /* Active date background */
-  color: white; /* Active date text color */
+  background-color: #007bff;
+  color: white;
 }
 
 .custom-calendar .react-calendar__tile--now {
-  background-color: #f0f0f0; /* Background for today */
+  background-color: #f0f0f0;
 }
 
 .custom-calendar .react-calendar__tile--booked {
-  background-color: #ffcccc; /* Booked dates background color */
-  color: red; /* Booked dates text color */
+  background-color: #ffcccc;
+  color: red;
 }
 
-/* Ensure your booked dates get this class */
 .booked-date {
-  background-color: #ffcccc; /* Color for booked dates */
+  background-color: #ffcccc;
 }

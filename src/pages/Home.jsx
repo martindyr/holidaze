@@ -6,7 +6,7 @@ import FeaturedSection from '../components/spesific/FeaturedSection';
 import { Button } from 'react-bootstrap';
 
 const Homepage = () => {
-  const [venues, setVenues] = useState([]); // Ensure venues is initialized as an array
+  const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -15,7 +15,6 @@ const Homepage = () => {
       try {
         const response = await getAllVenues();
 
-        // Check if the response contains the data array
         if (response && Array.isArray(response.data)) {
           setVenues(response.data);
         } else {

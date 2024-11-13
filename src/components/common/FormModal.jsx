@@ -1,4 +1,3 @@
-// FormModal.js
 import React from 'react';
 import { Button, Form, Alert } from 'react-bootstrap';
 import ModalWrapper from './ModalWrapper';

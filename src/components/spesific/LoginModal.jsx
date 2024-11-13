@@ -1,5 +1,3 @@
-// src/components/LoginModal.js
-
 import React, { useState } from 'react';
 import { loginUser } from '../../services/auth';
 import FormModal from '../common/FormModal';

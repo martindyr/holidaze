@@ -4,14 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getVenueById } from '../services/venues';
 import { createBooking } from '../services/bookings';
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { Button, Carousel, Card, Col, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './VenueDetails.css'
-import { FaWifi, FaParking, FaUtensils, FaPaw } from 'react-icons/fa'; // Importing React Icons
+import { FaWifi, FaParking, FaUtensils, FaPaw } from 'react-icons/fa';
 
-import BookingModal from '../components/spesific/BookingModal'; // Import the BookingModal
+import BookingModal from '../components/spesific/BookingModal';
 
 const VenueDetails = () => {
   const { id } = useParams();
@@ -19,7 +18,7 @@ const VenueDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [bookedDates, setBookedDates] = useState([]);
-  const [showModal, setShowModal] = useState(false); // State to control modal
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchVenue();
@@ -52,19 +51,6 @@ const VenueDetails = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  // Function to apply styling to booked dates from today onwards
-  const tileClassName = ({ date, view }) => {
-    if (view === 'month') {
-      const dateStr = date.toISOString().split('T')[0];
-      const todayStr = new Date().toISOString().split('T')[0];
-
-      if (bookedDates.includes(dateStr) && dateStr >= todayStr) {
-        return 'booked-date';
-      }
-    }
-    return null;
   };
 
   if (loading) return <div>Loading...</div>;

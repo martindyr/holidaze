@@ -1,5 +1,4 @@
 /* For creating ellipsis on text like descriptions */
-
 const truncateDescription = (description, maxWords = 30) => {
     if (!description) return 'No description available.';
 

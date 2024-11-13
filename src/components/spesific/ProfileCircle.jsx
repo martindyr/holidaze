@@ -1,7 +1,7 @@
 // ProfileCircle.js
 import React, { useEffect, useState } from 'react';
-import { getProfileByName } from '../../services/profiles'; // Adjust the import path if necessary
-import ProfileModal from './ProfileModal'; // Create this modal component
+import { getProfileByName } from '../../services/profiles'; 
+import ProfileModal from './ProfileModal';
 
 const ProfileCircle = () => {
     const [profile, setProfile] = useState(null);
@@ -9,7 +9,8 @@ const ProfileCircle = () => {
 
     useEffect(() => {
         const fetchProfile = async () => {
-            const name = localStorage.getItem('name'); // Get the name from local storage
+            // Get the name from local storage
+            const name = localStorage.getItem('name'); 
             if (name) {
                 const profileData = await getProfileByName(name);
                 if (!profileData.error) {
@@ -27,11 +28,10 @@ const ProfileCircle = () => {
 
     const handleCloseModal = () => {
         setShowModal(false);
-        // Optionally, refetch the profile here if you want to show updated data
     };
 
-    if (!profile) return null; // Or a loading state if you want
 
+    if (!profile) return null; 
     console.log('profile: ', profile)
 
 

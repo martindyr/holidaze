@@ -5,12 +5,12 @@ import LoginModal from '../spesific/LoginModal';
 import RegisterModal from '../spesific/RegisterModal';
 import ProfileCircle from '../spesific/ProfileCircle';
 import { Navbar, Nav, Button } from 'react-bootstrap';
-import './Header.css'; // Ensure you have this file for your styles
-import Logo from '../../assets/icons/Logo.png'; // Import your logo image
+import './Header.css'; 
+import Logo from '../../assets/icons/Logo.png'; 
 
 const Header = () => {
     const navigate = useNavigate();
-    const location = useLocation(); // Get current location
+    const location = useLocation();
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showRegisterModal, setShowRegisterModal] = useState(false);
 
@@ -23,7 +23,8 @@ const Header = () => {
     // Handle the logout process
     const handleLogout = () => {
         logout();
-        navigate('/'); // Navigate the user back to the home page after logout
+        // Navigate the user back to the home page after logout
+        navigate('/'); 
     };
 
     // Handle showing modals
@@ -35,7 +36,8 @@ const Header = () => {
     // Handle successful login (close modal and navigate)
     const handleLoginSuccess = () => {
         setShowLoginModal(false);
-        navigate('/'); // Navigate to home page
+        // Navigate to home page
+        navigate('/'); 
     };
 
     return (

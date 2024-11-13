@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomCard from '../common/CustomCard'; // The card component we created earlier
+import CustomCard from '../common/CustomCard'; 
 import { Row, Col, Card } from 'react-bootstrap';
 
 const FeaturedSection = ({ title, venues }) => {

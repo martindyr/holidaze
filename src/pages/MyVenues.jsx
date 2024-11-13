@@ -13,7 +13,7 @@ const MyVenues = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentVenue, setCurrentVenue] = useState(null);
   const [venueData, setVenueData] = useState({});
-  const [isEditing, setIsEditing] = useState(false); // Track if it's a create or edit modal
+  const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -46,7 +46,8 @@ const MyVenues = () => {
     setVenueData({
       name: '',
       description: '',
-      media: [], // Ensure media is initialized as an empty array
+    // Ensure media is initialized as an empty array
+      media: [], 
       price: 0,
       maxGuests: 1,
       location: {
@@ -69,14 +70,15 @@ const MyVenues = () => {
   const handleShowEditModal = (venue) => {
     setCurrentVenue(venue);
 
-    // Safely convert media array of objects into a comma-separated string for the input field
+    // Convert media array of objects into a comma-separated string for the input field
     const mediaString = Array.isArray(venue.media)
       ? venue.media.map((mediaItem) => mediaItem.url).join(', ')
       : ''; // If media is undefined or not an array, default to an empty string
 
-    setVenueData({
-      ...venue,
-      media: mediaString, // Set media as a comma-separated string
+      setVenueData({
+        ...venue,
+        // Set media as a comma-separated string
+        media: mediaString, 
     });
 
     setIsEditing(true);

@@ -44,7 +44,7 @@ const ProfileModal = ({ show, handleClose }) => {
         if (profileBio) dataToUpdate.bio = profileBio;
         if (avatarUrl) dataToUpdate.avatar = { url: avatarUrl, alt: "User Avatar" };
         if (bannerUrl) dataToUpdate.banner = { url: bannerUrl, alt: "User Banner" };
-        dataToUpdate.venueManager = isVenueManager; // This can be sent even if it's false
+        dataToUpdate.venueManager = isVenueManager; 
 
         const result = await updateProfileByName(profileName, dataToUpdate);
         if (result.error) {

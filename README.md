@@ -15,10 +15,9 @@ Welcome to **Holidaze**, your one-stop destination for booking and managing venu
     - [Installation](#installation)
     - [Running the Application](#running-the-application)
   - [Usage](#usage)
-  - [Testing](#testing)
-    - [Special Instructions for Testers](#special-instructions-for-testers)
     - [Important Notes](#important-notes)
   - [Deployment](#deployment)
+  - [Links](#links)
   - [Contact](#contact)
   - [Acknowledgments](#acknowledgments)
 
@@ -113,30 +112,11 @@ This will start the application on [http://localhost:3000](http://localhost:3000
   - Create new venues or edit existing ones using the modals.
   - View bookings for each venue directly on the **My Venues** page.
 
-## Testing
-
-### Special Instructions for Testers
-
-- **API Access**:
-  - The application interacts with the Holidaze API at `https://v2.api.noroff.dev`.
-  - An API key is required and has been hardcoded into the application for testing purposes: `'db9e7b5a-4cf1-4d0d-8be6-f625cfc61f44'`.
-
-- **Test User Accounts**:
-  - You can register new user accounts using the registration modal.
-  - To test venue management features, ensure you check the **Venue Manager** option during registration.
-
-- **Environment Variables**:
-  - No additional environment variables are required for testing.
-  - If you need to override any defaults, you can create a `.env` file in the root directory.
-
 ### Important Notes
 
 - **Data Persistence**:
   - Since the application uses the provided API, data created during testing (such as new venues or bookings) will be persistent.
   - Please refrain from deleting or altering venues or bookings that you did not create.
-
-- **Testing on Different Devices**:
-  - The application is responsive. Testing on various devices and screen sizes is encouraged to ensure consistent behavior.
 
 ## Deployment
 
@@ -147,6 +127,14 @@ npm run build
 ```
 
 This command will create an optimized production build in the `build` directory. You can then deploy the contents of this directory to your preferred hosting service.
+
+## Links
+- Gant chart: https://github.com/users/martindyr/projects/2/views/2
+- Kanban Project board: https://github.com/users/martindyr/projects/2/views/1
+- Wirframe: 
+- Styleguide:
+- Github project:
+- Netlify:
 
 ## Contact
 
@@ -159,5 +147,5 @@ For any inquiries or issues, please contact:
 ## Acknowledgments
 
 - **Noroff School of Technology and Digital Media**: For providing the API and project framework.
-- **React and Bootstrap Communities**: For the excellent tools and documentation.
+- **React and Bootstrap Communities**: For the tools and documentation.
 - **Contributors**: Thank you to everyone who has contributed to this project.

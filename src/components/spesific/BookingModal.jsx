@@ -1,5 +1,3 @@
-// src/components/specific/BookingModal.js
-
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import Calendar from 'react-calendar';
@@ -22,7 +20,7 @@ const BookingModal = ({
 
   useEffect(() => {
     if (!show) {
-      setSelectedDates([]); // Clear dates when modal closes
+      setSelectedDates([]);
       setBookingError('');
       setBookingSuccess('');
       console.log('Modal Closed. State Reset.');
@@ -84,7 +82,8 @@ const BookingModal = ({
     const actualEnd = startOfDay(end);
 
     while (!isAfter(currentDate, actualEnd)) {
-      const dateStr = currentDate.toISOString().split('T')[0]; // Format date as 'YYYY-MM-DD' in UTC
+      // Format date as 'YYYY-MM-DD' in UTC
+      const dateStr = currentDate.toISOString().split('T')[0]; 
       selectedRange.push(dateStr);
       currentDate = addDays(currentDate, 1);
     }
@@ -131,7 +130,8 @@ const BookingModal = ({
     const { guests } = bookingData;
 
     const bookingPayload = {
-      dateFrom: dateFrom.toISOString(), // Keep as ISO string for backend
+      // Keep as ISO string for backend
+      dateFrom: dateFrom.toISOString(), 
       dateTo: dateTo.toISOString(),
       guests: parseInt(guests),
       venueId: venue.id,
@@ -146,7 +146,7 @@ const BookingModal = ({
       if (fetchVenue) {
         await fetchVenue();
       }
-      setTimeout(() => handleClose(), 2000); // Close modal after successful booking
+      setTimeout(() => handleClose(), 2000);
     } catch (err) {
       setBookingError('An error occurred while booking.');
       console.error('Booking Error:', err);
@@ -154,7 +154,8 @@ const BookingModal = ({
   };
 
   const formatShortWeekday = (locale, date) => {
-    return date.toLocaleDateString(locale, { weekday: 'narrow' }).toUpperCase(); // Returns first letter of the weekday
+    // Returns first letter of the weekday
+    return date.toLocaleDateString(locale, { weekday: 'narrow' }).toUpperCase(); 
   };
 
   return (
@@ -189,7 +190,8 @@ const BookingModal = ({
                 if (view !== 'month') return null;
                 const dateStr = date.toISOString().split('T')[0];
                 if (bookedDates.includes(dateStr)) {
-                  return 'booked-date'; // Add a custom class for booked dates
+                  // Add a custom class for booked dates
+                  return 'booked-date'; 
                 }
                 return null;
               }}

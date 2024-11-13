@@ -11,8 +11,6 @@ const headers = {
     'X-Noroff-API-Key': apiKey,               
 }
 
-
-
 // Function to get all venues
 export async function getAllVenues() {
     const url = `${baseUrl}`
