@@ -1,4 +1,3 @@
-// ProfileCircle.js
 import React, { useEffect, useState } from 'react';
 import { getProfileByName } from '../../services/profiles'; 
 import ProfileModal from './ProfileModal';
@@ -30,13 +29,14 @@ const ProfileCircle = () => {
         setShowModal(false);
     };
 
-
     if (!profile) return null; 
-    console.log('profile: ', profile)
-
+    console.log('profile: ', profile);
 
     // Extract initials from the name
     const initials = profile.data.name ? profile.data.name.charAt(0).toUpperCase() : '';
+
+    // Determine whether to show the avatar image or initials
+    const avatarUrl = profile.data.avatar?.url;
 
     return (
         <>
@@ -44,8 +44,8 @@ const ProfileCircle = () => {
                 className="profile-circle"
                 onClick={handleCircleClick}
                 style={{
-                    width: '30px',
-                    height: '30px',
+                    width: '50px',
+                    height: '50px',
                     borderRadius: '50%',
                     backgroundColor: '#007bff',
                     color: 'white',
@@ -54,9 +54,23 @@ const ProfileCircle = () => {
                     justifyContent: 'center',
                     cursor: 'pointer',
                     alignSelf: 'center',
+                    overflow: 'hidden',
                 }}
             >
-                {initials}
+                {avatarUrl ? (
+                    <img 
+                        src={avatarUrl} 
+                        alt="Profile Avatar" 
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            borderRadius: '50%',
+                        }} 
+                    />
+                ) : (
+                    initials
+                )}
             </div>
 
             <ProfileModal show={showModal} handleClose={handleCloseModal} profile={profile} />

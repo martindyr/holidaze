@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
-import { getProfileByName, updateProfileByName } from '../../services/profiles'; // Make sure this path is correct
+import { getProfileByName, updateProfileByName } from '../../services/profiles'; // Ensure this path is correct
 
 const ProfileModal = ({ show, handleClose }) => {
     const [profile, setProfile] = useState({});
@@ -28,13 +28,13 @@ const ProfileModal = ({ show, handleClose }) => {
     }, []);
 
     const handleProfileUpdate = async () => {
-        const profileName = localStorage.getItem('name'); // Ensure this is not undefined
+        const profileName = localStorage.getItem('name'); 
         if (!profileName) {
             console.error("Profile name is undefined.");
             return;
         }
 
-        // Check if at least one field is filled
+       
         if (!profileBio && !avatarUrl && !bannerUrl && !isVenueManager) {
             setError('Please fill out at least one field before saving.');
             return;
@@ -66,6 +66,37 @@ const ProfileModal = ({ show, handleClose }) => {
             <Modal.Body>
                 {error && <Alert variant="danger">{error}</Alert>}
                 {success && <Alert variant="success">{success}</Alert>}
+                
+                <div 
+                    className="profile-banner"
+                    style={{
+                        backgroundImage: `url(${bannerUrl})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        position: 'relative',
+                        height: '200px',
+                        display: 'flex',
+                        alignItems: 'flex-end', 
+                        justifyContent: 'flex-end',
+                    }}
+                >
+                    {avatarUrl && (
+                        <img
+                            src={avatarUrl}
+                            alt="Profile Avatar"
+                            style={{
+                                width: '80px',
+                                height: '80px',
+                                borderRadius: '50%',
+                                objectFit: 'cover',
+                                marginBottom: '10px',
+                                marginRight: '10px',
+                                border: '4px solid white',
+                            }}
+                        />
+                    )}
+                </div>
+                
                 <Form>
                     <Form.Group controlId="profileBio">
                         <Form.Label>Bio</Form.Label>

@@ -34,10 +34,14 @@ const FormModal = ({
                 type={field.type}
                 name={field.name}
                 value={
-                  field.name === 'text'
-                    ? Array.isArray(formData.media)
-                      ? formData.media.map((item) => item.url).join(', ')
-                      : ''
+                  field.name === 'location.country'
+                    ? formData.location?.country || ''
+                    : field.name === 'location.city'
+                    ? formData.location?.city || ''
+                    : field.name === 'location.address'
+                    ? formData.location?.address || ''
+                    : field.name === 'media'
+                    ? formData.media || ''
                     : formData[field.name] || ''
                 }
                 onChange={handleInputChange}

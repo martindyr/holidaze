@@ -20,17 +20,14 @@ const VenueModal = ({
   
     const formData = { ...venueData };
   
-    // Ensure media is always an array of objects with url property
     if (formData.media && Array.isArray(formData.media)) {
       formData.media = formData.media.map((item) => {
         if (typeof item === 'string') {
-          // If item is a string, turn it into an object
           return { url: item.trim() };
         } else if (typeof item === 'object' && item.url) {
-          // If item is already an object with a url property, just trim the url
           return { url: item.url.trim() };
         }
-        return item; // In case the data is neither string nor object
+        return item;
       });
     } else if (formData.media && typeof formData.media === 'string') {
       formData.media = formData.media.split(',').map((url) => ({ url: url.trim() }));
@@ -52,9 +49,9 @@ const VenueModal = ({
     { label: 'Media URLs (comma-separated)', name: 'media', type: 'text' },
     { label: 'Price', name: 'price', type: 'number', required: true },
     { label: 'Max Guests', name: 'maxGuests', type: 'number', required: true },
-    { label: 'Country', name: 'country', type: 'text' },
-    { label: 'City', name: 'city', type: 'text' },
-    { label: 'Address', name: 'address', type: 'text'},
+    { label: 'Country', name: 'location.country', type: 'text' },
+    { label: 'City', name: 'location.city', type: 'text' },
+    { label: 'Address', name: 'location.address', type: 'text'},
     { label: 'WiFi', name: 'wifi', type: 'checkbox' },
     { label: 'Parking', name: 'parking', type: 'checkbox' },
     { label: 'Breakfast', name: 'breakfast', type: 'checkbox' },

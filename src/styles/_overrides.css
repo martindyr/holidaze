@@ -1,0 +1,8 @@
+.btn-danger {
+    background-color: var(--bs-danger) !important;
+    border-color: var(--bs-danger) !important;
+}
+
+.btn-primary {
+    background-color: var(--bs-primary) !important;
+}

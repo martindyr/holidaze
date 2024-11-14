@@ -10,7 +10,6 @@
   --success: #4caf50;
   --info-color: #2196f3;
 
-
   --font-primary: 'Poppins', sans-serif;
   --font-secondary: 'Roboto', sans-serif;
 
@@ -24,4 +23,16 @@
   --desktop-column-width: 76px;
   --tablet-column-width: 80px;
   --mobile-column-width: 72px;
+}
+
+/* Override Bootstrap default colors */
+:root {
+  --bs-primary: var(--primary-color) !important;
+  --bs-secondary: var(--secondary-color);
+  --bs-success: var(--success);
+  --bs-danger: var(--error-color);
+  --bs-warning: var(--warning-color);
+  --bs-info: var(--info-color);
+  --bs-light: var(--light-color);
+  --bs-dark: var(--dark-color);
 }
