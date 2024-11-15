@@ -140,7 +140,7 @@ This command will create an optimized production build in the `build` directory.
 
 For any inquiries or issues, please contact:
 
-- **[Your Name]**
+- **Martin Dyrset**
 - **Email**: [martindhusby@hotmail.com](mailto:martindhusby@hotmail.com)
 - **GitHub**: [martindyr](https://github.com/martindyr)
 
